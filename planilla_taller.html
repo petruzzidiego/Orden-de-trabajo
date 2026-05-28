@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planilla de Taller</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.10.0/dist/tabler-icons.min.css">
+<style>
+:root {
+  --bg: #F5F2ED;
+  --bg2: #EDE9E2;
+  --bg3: #E4DFD6;
+  --surface: #FDFAF6;
+  --border: #D4CEC4;
+  --border2: #C8C1B5;
+  --text: #1A1714;
+  --text2: #6B6560;
+  --text3: #9B948C;
+  --accent: #2D5016;
+  --accent2: #3A6B1E;
+  --accent-light: #EAF0E3;
+  --danger: #8B2020;
+  --danger-light: #F5E8E8;
+  --warn: #7A4A10;
+  --warn-light: #F5EDE0;
+  --blue: #1A3A5C;
+  --blue-light: #E3EBF4;
+  --purple: #3C2A6B;
+  --purple-light: #EDE8F5;
+  --radius: 6px;
+  --radius-lg: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Georgia', 'Times New Roman', serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; }
+
+/* Layout */
+.header { background: var(--accent); color: #fff; padding: 0 24px; display: flex; align-items: center; gap: 16px; height: 56px; box-shadow: 0 2px 8px rgba(0,0,0,.2); position: sticky; top: 0; z-index: 50; }
+.header-logo { font-size: 18px; font-weight: 700; letter-spacing: -.5px; display: flex; align-items: center; gap: 8px; }
+.header-logo i { font-size: 22px; }
+.header-sub { font-size: 12px; opacity: .7; margin-top: 1px; font-style: italic; }
+.header-actions { margin-left: auto; display: flex; gap: 8px; }
+
+.main { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+
+/* Toolbar */
+.toolbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+.search-wrap { flex: 1; min-width: 180px; position: relative; }
+.search-wrap i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 16px; pointer-events: none; }
+.search-wrap input { width: 100%; height: 38px; padding: 0 12px 0 34px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 13px; font-family: inherit; transition: border-color .15s; }
+.search-wrap input:focus { outline: none; border-color: var(--accent); }
+
+select.filter-sel { height: 38px; padding: 0 10px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 13px; font-family: inherit; cursor: pointer; }
+select.filter-sel:focus { outline: none; border-color: var(--accent); }
+
+/* Buttons */
+.btn { height: 38px; padding: 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); cursor: pointer; font-size: 13px; font-family: inherit; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: all .15s; box-shadow: var(--shadow); }
+.btn:hover { background: var(--bg2); border-color: var(--border2); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
+.btn-danger { color: var(--danger); border-color: var(--danger-light); }
+.btn-danger:hover { background: var(--danger-light); }
+.btn-sm { height: 30px; padding: 0 10px; font-size: 12px; box-shadow: none; }
+.btn-xs { height: 24px; padding: 0 8px; font-size: 11px; box-shadow: none; }
+.btn-save { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-save:hover { background: var(--accent2); }
+.btn-icon { width: 30px; height: 30px; padding: 0; justify-content: center; border-radius: var(--radius); }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; box-shadow: var(--shadow); }
+.stat-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+.stat-val { font-size: 26px; font-weight: 700; color: var(--text); line-height: 1; }
+.stat-val.green { color: var(--accent); }
+.stat-val.warn { color: var(--warn); }
+
+/* Cards */
+.cards { display: flex; flex-direction: column; gap: 10px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; transition: box-shadow .15s; }
+.card:hover { box-shadow: var(--shadow-md); }
+.card.cerrado { opacity: .65; }
+.card-header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; cursor: pointer; user-select: none; }
+.card-header:hover { background: var(--bg2); }
+.card-num { font-size: 11px; color: var(--text3); font-style: italic; min-width: 30px; }
+.card-info { flex: 1; min-width: 0; }
+.card-title { font-size: 15px; font-weight: 700; letter-spacing: -.2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-sub { font-size: 12px; color: var(--text2); margin-top: 2px; font-style: italic; }
+.prog-bar { height: 3px; background: var(--bg3); border-radius: 2px; margin-top: 6px; overflow: hidden; max-width: 200px; }
+.prog-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width .4s ease; }
+.card-badges { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.chevron { font-size: 18px; color: var(--text3); transition: transform .2s; flex-shrink: 0; }
+.chevron.open { transform: rotate(180deg); }
+
+/* Badges */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; letter-spacing: .02em; }
+.b-espera { background: var(--purple-light); color: var(--purple); }
+.b-fabricacion { background: var(--warn-light); color: var(--warn); }
+.b-terminado { background: var(--blue-light); color: var(--blue); }
+.b-pintado { background: #F5EBE8; color: #6B2010; }
+.b-retirar { background: var(--accent-light); color: var(--accent); }
+.b-cerrado { background: var(--bg3); color: var(--text2); }
+.b-si { background: var(--accent-light); color: var(--accent); }
+.b-no { background: var(--danger-light); color: var(--danger); }
+.b-vence { background: var(--danger-light); color: var(--danger); }
+
+/* Card body */
+.card-body { padding: 0 16px 16px; border-top: 1px solid var(--border); }
+.meta-row { display: flex; gap: 16px; flex-wrap: wrap; padding: 12px 0; font-size: 12px; color: var(--text2); }
+.meta-row span { display: flex; align-items: center; gap: 5px; }
+.meta-row .vence { color: var(--danger); font-weight: 600; }
+
+/* Materiales */
+.mat-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+.mat-chip { background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; padding: 3px 8px; font-size: 11px; color: var(--text2); display: flex; align-items: center; gap: 5px; }
+.mat-chip button { background: none; border: none; cursor: pointer; color: var(--text3); padding: 0; line-height: 1; font-size: 13px; display: flex; align-items: center; }
+.mat-chip button:hover { color: var(--danger); }
+
+/* Sect title */
+.sect-title { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; margin: 14px 0 8px; display: flex; align-items: center; gap: 6px; }
+.sect-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* Items table */
+.items-wrap { overflow-x: auto; }
+.items-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 560px; }
+.items-table th { font-size: 11px; font-weight: 600; color: var(--text3); text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border); letter-spacing: .04em; text-transform: uppercase; background: var(--bg2); }
+.items-table td { padding: 8px 10px; border-bottom: 1px solid var(--bg3); vertical-align: top; }
+.items-table tr:last-child td { border-bottom: none; }
+.items-table tr.item-done td { opacity: .55; }
+.item-desc-name { font-weight: 600; font-size: 13px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.item-done-icon { color: var(--accent); font-size: 15px; }
+
+/* Entregas */
+.entregas-list { display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px; }
+.entrega-row { display: flex; align-items: center; gap: 6px; font-size: 12px; background: var(--bg2); border-radius: 4px; padding: 4px 8px; border: 1px solid var(--border); }
+.entrega-fecha { color: var(--text3); min-width: 68px; font-style: italic; }
+.entrega-cant { font-weight: 700; color: var(--accent); min-width: 36px; }
+.entrega-nota { flex: 1; color: var(--text2); }
+.entrega-del { background: none; border: none; cursor: pointer; color: var(--text3); padding: 0 2px; display: flex; align-items: center; font-size: 14px; margin-left: auto; }
+.entrega-del:hover { color: var(--danger); }
+
+.add-entrega { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
+.add-entrega input { height: 28px; padding: 0 8px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 12px; font-family: inherit; }
+.add-entrega input:focus { outline: none; border-color: var(--accent); }
+.inp-fecha { width: 130px; }
+.inp-cant { width: 62px; }
+.inp-nota { flex: 1; min-width: 90px; }
+
+.item-estado select { height: 28px; padding: 0 6px; font-size: 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font-family: inherit; cursor: pointer; width: 100%; }
+.item-estado select:focus { outline: none; border-color: var(--accent); }
+.item-estado select:disabled { opacity: .5; cursor: default; }
+
+.prog-text { font-size: 13px; font-weight: 700; }
+.prog-text.complete { color: var(--accent); }
+
+/* Add item row */
+.add-item-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 8px; padding: 10px; background: var(--bg2); border-radius: var(--radius); border: 1px dashed var(--border2); }
+.add-item-row input, .add-item-row select { height: 32px; padding: 0 8px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 12px; font-family: inherit; }
+.add-item-row input:focus, .add-item-row select:focus { outline: none; border-color: var(--accent); }
+
+/* Card footer */
+.card-footer { display: flex; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+
+/* Modal */
+.modal-bg { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5); align-items: center; justify-content: center; z-index: 200; }
+.modal-bg.open { display: flex; }
+.modal { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; width: 560px; max-width: 95vw; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-md); }
+.modal h3 { font-size: 18px; font-weight: 700; margin-bottom: 18px; letter-spacing: -.3px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1 / -1; }
+label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; }
+input, select, textarea { height: 38px; padding: 0 10px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--text); font-size: 13px; font-family: inherit; transition: border-color .15s; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+textarea { height: 80px; padding: 8px 10px; resize: vertical; }
+.modal-footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+
+/* Backup panel */
+.backup-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 20px; display: none; box-shadow: var(--shadow); }
+.backup-panel.open { display: block; }
+.backup-panel h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.backup-panel p { font-size: 12px; color: var(--text2); margin-bottom: 14px; font-style: italic; }
+.backup-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.backup-version { font-size: 11px; color: var(--text3); margin-left: auto; font-style: italic; }
+
+/* Version badge */
+.ver-badge { font-size: 11px; background: rgba(255,255,255,.15); border-radius: 4px; padding: 2px 7px; font-style: italic; }
+
+/* Empty */
+.empty { padding: 3rem; text-align: center; color: var(--text3); font-size: 14px; font-style: italic; }
+.empty i { font-size: 40px; display: block; margin: 0 auto 10px; opacity: .4; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .header-sub { display: none; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: 1; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-logo">
+    <i class="ti ti-tools"></i>
+    <div>
+      <div>Planilla de Taller</div>
+      <div class="header-sub">Control de trabajos y entregas</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-sm" onclick="toggleBackup()" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff">
+      <i class="ti ti-database"></i> Backup
+    </button>
+    <span class="ver-badge" id="ver-badge">v1.0</span>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Backup panel -->
+  <div class="backup-panel" id="backup-panel">
+    <h4><i class="ti ti-database"></i> Backup y datos</h4>
+    <p>Exportá tus datos para hacer una copia de seguridad, o importá un backup anterior. Los datos se guardan automáticamente en el navegador.</p>
+    <div class="backup-actions">
+      <button class="btn btn-sm" onclick="exportar()"><i class="ti ti-download"></i> Exportar backup</button>
+      <label class="btn btn-sm" style="cursor:pointer"><i class="ti ti-upload"></i> Importar backup<input type="file" accept=".json" onchange="importar(this)" style="display:none"></label>
+      <button class="btn btn-sm btn-danger" onclick="limpiarTodo()"><i class="ti ti-trash"></i> Limpiar todo</button>
+      <span class="backup-version" id="backup-info"></span>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <i class="ti ti-search"></i>
+      <input type="text" id="buscar" placeholder="Buscar por cliente u obra..." oninput="render()">
+    </div>
+    <select class="filter-sel" id="filtroEstado" onchange="render()">
+      <option value="">Todos los trabajos</option>
+      <option value="activo">Activos</option>
+      <option value="cerrado">Cerrados</option>
+    </select>
+    <button class="btn btn-primary" onclick="abrirModal()"><i class="ti ti-plus"></i> Nuevo trabajo</button>
+  </div>
+
+  <div class="stats" id="stats"></div>
+  <div class="cards" id="cards"></div>
+
+</main>
+
+<!-- Modal -->
+<div class="modal-bg" id="modal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h3 id="modal-title">Nuevo trabajo</h3>
+    <div class="form-grid" id="modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn btn-save" onclick="guardarModal()"><i class="ti ti-device-floppy"></i> Guardar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const VERSION = '1.0';
+const STORAGE_KEY = 'taller_planilla_v2';
+
+const ESTADOS_ITEM = {
+  espera: 'Esperando material',
+  fabricacion: 'En fabricación',
+  terminado: 'Terminado',
+  pintado: 'Pintado',
+  retirar: 'Para retirar'
+};
+
+let trabajos = [];
+let editandoId = null;
+let matModalTemp = [];
+let abiertos = {};
+let nextId = 1;
+
+// ── Storage ──────────────────────────────────────────────
+function guardar() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: VERSION, datos: trabajos, ts: new Date().toISOString() }));
+  } catch(e) {}
+  actualizarBackupInfo();
+}
+
+function cargar() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const obj = JSON.parse(raw);
+    trabajos = obj.datos || obj;
+    return true;
+  } catch(e) { return false; }
+}
+
+function actualizarBackupInfo() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const obj = JSON.parse(raw);
+    const ts = obj.ts ? new Date(obj.ts).toLocaleString('es-AR') : '—';
+    document.getElementById('backup-info').textContent = `Última guardado: ${ts} · ${trabajos.length} trabajos`;
+    document.getElementById('ver-badge').textContent = 'v' + (obj.version || '?');
+  } catch(e) {}
+}
+
+// ── Backup ────────────────────────────────────────────────
+function toggleBackup() {
+  const p = document.getElementById('backup-panel');
+  p.classList.toggle('open');
+  actualizarBackupInfo();
+}
+
+function exportar() {
+  const data = { version: VERSION, exportado: new Date().toISOString(), datos: trabajos };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `taller_backup_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+}
+
+function importar(input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const obj = JSON.parse(e.target.result);
+      const datos = obj.datos || obj;
+      if (!Array.isArray(datos)) { alert('Archivo inválido.'); return; }
+      if (!confirm(`¿Importar ${datos.length} trabajos? Esto reemplaza los datos actuales.`)) return;
+      trabajos = datos;
+      nextId = trabajos.length ? Math.max(...trabajos.map(t => t.id)) + 1 : 1;
+      guardar(); render();
+      alert('Backup importado correctamente.');
+    } catch(err) { alert('Error al leer el archivo.'); }
+  };
+  reader.readAsText(file);
+  input.value = '';
+}
+
+function limpiarTodo() {
+  if (!confirm('¿Eliminar TODOS los trabajos? Hacé un backup primero.')) return;
+  if (!confirm('Segunda confirmación: ¿estás seguro?')) return;
+  trabajos = []; nextId = 1; abiertos = {};
+  guardar(); render();
+}
+
+// ── Helpers ───────────────────────────────────────────────
+function fmt(d) { if (!d) return '—'; const [y,m,dd] = d.split('-'); return `${dd}/${m}/${y}`; }
+function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function hoyISO() { return new Date().toISOString().slice(0,10); }
+function entregadoItem(it) { return it.entregas.reduce((s,e) => s + Number(e.cant), 0); }
+function itemCompleto(it) { return entregadoItem(it) >= it.total; }
+function trabajoCerrado(t) { return t.items.length > 0 && t.items.every(it => itemCompleto(it)); }
+function progTrabajo(t) {
+  const tot = t.items.reduce((s,it) => s + it.total, 0);
+  const ent = t.items.reduce((s,it) => s + entregadoItem(it), 0);
+  return tot > 0 ? Math.round(ent / tot * 100) : 0;
+}
+function estadoPrincipal(t) {
+  if (!t.items.length) return 'espera';
+  const orden = ['fabricacion','espera','pintado','terminado','retirar'];
+  for (const e of orden) { if (t.items.some(i => i.estado === e && !itemCompleto(i))) return e; }
+  return t.items[0].estado;
+}
+
+// ── Render ────────────────────────────────────────────────
+function render() {
+  const q = document.getElementById('buscar').value.toLowerCase();
+  const f = document.getElementById('filtroEstado').value;
+  const lista = trabajos.filter(t => {
+    const mq = !q || (t.cliente + t.obra).toLowerCase().includes(q);
+    const cerrado = trabajoCerrado(t);
+    const mf = !f || (f === 'activo' && !cerrado) || (f === 'cerrado' && cerrado);
+    return mq && mf;
+  });
+
+  const cerrados = trabajos.filter(t => trabajoCerrado(t)).length;
+  const activos = trabajos.length - cerrados;
+  const enFab = trabajos.filter(t => !trabajoCerrado(t) && t.items.some(i => i.estado === 'fabricacion')).length;
+  const vencidos = trabajos.filter(t => {
+    if (!t.necesidad || trabajoCerrado(t)) return false;
+    return new Date(t.necesidad + 'T12:00:00') < new Date();
+  }).length;
+
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="stat-label">Total</div><div class="stat-val">${trabajos.length}</div></div>
+    <div class="stat"><div class="stat-label">Activos</div><div class="stat-val green">${activos}</div></div>
+    <div class="stat"><div class="stat-label">Fabricación</div><div class="stat-val warn">${enFab}</div></div>
+    <div class="stat"><div class="stat-label">Cerrados</div><div class="stat-val">${cerrados}</div></div>
+    ${vencidos ? `<div class="stat"><div class="stat-label">Vencidos</div><div class="stat-val" style="color:var(--danger)">${vencidos}</div></div>` : ''}
+  `;
+
+  const cards = document.getElementById('cards');
+  if (!lista.length) {
+    cards.innerHTML = `<div class="empty"><i class="ti ti-clipboard-x"></i>No hay trabajos${q || f ? ' con ese filtro' : ''}.</div>`;
+    return;
+  }
+
+  const hoyD = new Date(); hoyD.setHours(0,0,0,0);
+  cards.innerHTML = lista.map(t => {
+    const cerrado = trabajoCerrado(t);
+    const prog = progTrabajo(t);
+    const nec = t.necesidad ? new Date(t.necesidad + 'T12:00:00') : null;
+    const vence = nec && !cerrado && nec < hoyD;
+    const abierto = !!abiertos[t.id];
+    const estPpal = estadoPrincipal(t);
+
+    return `<div class="card${cerrado ? ' cerrado' : ''}" id="card-${t.id}">
+      <div class="card-header" onclick="toggle(${t.id})">
+        <span class="card-num">#${t.id}</span>
+        <div class="card-info">
+          <div class="card-title">${esc(t.cliente)} — <span style="font-weight:400;font-style:italic">${esc(t.obra)}</span></div>
+          <div class="card-sub">F. necesidad: ${fmt(t.necesidad)}${vence ? ' ⚠ VENCIDO' : ''} · ${t.items.length} ítem${t.items.length !== 1 ? 's' : ''}</div>
+          <div class="prog-bar"><div class="prog-fill" style="width:${prog}%"></div></div>
+        </div>
+        <div class="card-badges">
+          ${cerrado
+            ? '<span class="badge b-cerrado"><i class="ti ti-circle-check"></i> Cerrado</span>'
+            : `<span class="badge b-${estPpal}">${ESTADOS_ITEM[estPpal]}</span>`}
+          ${vence ? '<span class="badge b-vence"><i class="ti ti-alert-triangle"></i> Vencido</span>' : ''}
+          <span style="font-size:12px;color:var(--text3);min-width:32px;text-align:right">${prog}%</span>
+        </div>
+        <i class="ti ti-chevron-down chevron${abierto ? ' open' : ''}"></i>
+      </div>
+
+      ${abierto ? `<div class="card-body">
+        <div class="meta-row">
+          <span><i class="ti ti-calendar-plus"></i> Pedido: ${fmt(t.pedido)}</span>
+          <span class="${vence ? 'vence' : ''}"><i class="ti ti-alarm"></i> Necesidad: ${fmt(t.necesidad)}${vence ? ' ⚠' : ''}</span>
+          <span><i class="ti ti-package"></i> Materiales: ${t.pedidoMat
+            ? '<span class="badge b-si" style="font-size:10px;padding:2px 7px"><i class="ti ti-check"></i> Pedido</span>'
+            : '<span class="badge b-no" style="font-size:10px;padding:2px 7px"><i class="ti ti-x"></i> Pendiente</span>'}</span>
+        </div>
+
+        ${t.materiales && t.materiales.length ? `
+          <div class="mat-chips">${t.materiales.map(m => `<div class="mat-chip"><i class="ti ti-box" style="font-size:12px"></i>${esc(m.desc)}${m.cant ? ' — ' + esc(m.cant) : ''}</div>`).join('')}</div>
+        ` : ''}
+
+        <div class="sect-title"><i class="ti ti-list-details"></i> Ítems del trabajo</div>
+        <div class="items-wrap">
+        <table class="items-table">
+          <thead><tr><th>Descripción y entregas</th><th style="text-align:center;white-space:nowrap">Pedido</th><th style="text-align:center;white-space:nowrap">Entregado</th><th>Estado</th><th style="width:32px"></th></tr></thead>
+          <tbody>
+            ${t.items.length ? t.items.map(it => {
+              const ent = entregadoItem(it);
+              const comp = itemCompleto(it);
+              const restante = it.total - ent;
+              return `<tr class="${comp ? 'item-done' : ''}">
+                <td>
+                  <div class="item-desc-name">
+                    ${comp ? '<i class="ti ti-circle-check item-done-icon"></i>' : ''}
+                    ${esc(it.desc)}
+                  </div>
+                  <div class="entregas-list">
+                    ${it.entregas.map((e, ei) => `<div class="entrega-row">
+                      <span class="entrega-fecha"><i class="ti ti-truck" style="font-size:11px"></i> ${fmt(e.fecha)}</span>
+                      <span class="entrega-cant">+${e.cant}</span>
+                      <span class="entrega-nota">${esc(e.nota)}</span>
+                      <button class="entrega-del" onclick="quitarEntrega(${t.id},${it.id},${ei})" title="Quitar entrega"><i class="ti ti-x"></i></button>
+                    </div>`).join('')}
+                  </div>
+                  ${!comp ? `<div class="add-entrega">
+                    <input type="date" class="inp-fecha" id="ef-${t.id}-${it.id}" value="${hoyISO()}">
+                    <input type="number" class="inp-cant" id="ec-${t.id}-${it.id}" placeholder="Cant." min="1" max="${restante}">
+                    <input type="text" class="inp-nota" id="en-${t.id}-${it.id}" placeholder="Nota (quién recibió, etc.)">
+                    <button class="btn btn-xs btn-primary" onclick="registrarEntrega(${t.id},${it.id})"><i class="ti ti-plus"></i> Registrar</button>
+                  </div>` : ''}
+                </td>
+                <td style="text-align:center;font-weight:700;font-size:15px">${it.total}</td>
+                <td style="text-align:center">
+                  <span class="prog-text${comp ? ' complete' : ''}">${ent}/${it.total}</span>
+                </td>
+                <td class="item-estado">
+                  <select onchange="cambiarEstadoItem(${t.id},${it.id},this.value)" ${comp ? 'disabled' : ''}>
+                    ${Object.entries(ESTADOS_ITEM).map(([k,v]) => `<option value="${k}"${it.estado === k ? ' selected' : ''}>${v}</option>`).join('')}
+                  </select>
+                </td>
+                <td>
+                  <button class="btn btn-icon btn-sm" onclick="quitarItem(${t.id},${it.id})" title="Quitar ítem" style="color:var(--danger)"><i class="ti ti-trash"></i></button>
+                </td>
+              </tr>`;
+            }).join('') : `<tr><td colspan="5" style="text-align:center;color:var(--text3);padding:16px;font-style:italic">Sin ítems — agregá uno abajo</td></tr>`}
+          </tbody>
+        </table>
+        </div>
+
+        <div class="add-item-row">
+          <input type="text" id="ni-desc-${t.id}" placeholder="Descripción del ítem (ej: Marco de puerta)" style="flex:2;min-width:140px">
+          <input type="number" id="ni-cant-${t.id}" placeholder="Cant." min="1" style="width:64px">
+          <select id="ni-est-${t.id}" style="height:32px;padding:0 6px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:inherit;font-size:12px">
+            ${Object.entries(ESTADOS_ITEM).map(([k,v]) => `<option value="${k}">${v}</option>`).join('')}
+          </select>
+          <button class="btn btn-sm btn-primary" onclick="agregarItem(${t.id})"><i class="ti ti-plus"></i> Agregar ítem</button>
+        </div>
+
+        <div class="card-footer">
+          <button class="btn btn-sm" onclick="abrirModal(${t.id})"><i class="ti ti-edit"></i> Editar datos</button>
+          <button class="btn btn-sm btn-danger" onclick="eliminar(${t.id})" style="margin-left:auto"><i class="ti ti-trash"></i> Eliminar trabajo</button>
+        </div>
+      </div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ── Toggle ────────────────────────────────────────────────
+function toggle(id) { abiertos[id] = !abiertos[id]; render(); }
+
+// ── Entregas ──────────────────────────────────────────────
+function registrarEntrega(tid, iid) {
+  const t = trabajos.find(x => x.id === tid); if (!t) return;
+  const it = t.items.find(x => x.id === iid); if (!it) return;
+  const fecha = document.getElementById(`ef-${tid}-${iid}`).value;
+  const cant = parseInt(document.getElementById(`ec-${tid}-${iid}`).value);
+  const nota = document.getElementById(`en-${tid}-${iid}`).value.trim();
+  const restante = it.total - entregadoItem(it);
+  if (!fecha) { alert('Ingresá la fecha de entrega.'); return; }
+  if (!cant || cant < 1 || cant > restante) { alert(`Cantidad inválida. Máximo a entregar: ${restante}`); return; }
+  it.entregas.push({ fecha, cant, nota });
+  const cerrabaAntes = trabajoCerrado({ ...t, items: t.items.filter(i => i.id !== iid) });
+  guardar(); render();
+  if (trabajoCerrado(t) && !cerrabaAntes) {
+    setTimeout(() => alert(`✅ ¡Trabajo #${t.id} completado! Todos los ítems fueron entregados.`), 100);
+  }
+}
+
+function quitarEntrega(tid, iid, ei) {
+  if (!confirm('¿Quitar esta entrega?')) return;
+  const t = trabajos.find(x => x.id === tid);
+  const it = t.items.find(x => x.id === iid);
+  it.entregas.splice(ei, 1);
+  guardar(); render();
+}
+
+// ── Items ─────────────────────────────────────────────────
+function cambiarEstadoItem(tid, iid, val) {
+  const t = trabajos.find(x => x.id === tid);
+  const it = t.items.find(x => x.id === iid);
+  it.estado = val; guardar(); render();
+}
+
+function agregarItem(tid) {
+  const t = trabajos.find(x => x.id === tid); if (!t) return;
+  const desc = document.getElementById(`ni-desc-${tid}`).value.trim();
+  const cant = parseInt(document.getElementById(`ni-cant-${tid}`).value);
+  const est = document.getElementById(`ni-est-${tid}`).value;
+  if (!desc || !cant || cant < 1) { alert('Completá la descripción y la cantidad.'); return; }
+  const nextIid = t.items.length ? Math.max(...t.items.map(i => i.id)) + 1 : 1;
+  t.items.push({ id: nextIid, desc, total: cant, estado: est, entregas: [] });
+  guardar(); render();
+}
+
+function quitarItem(tid, iid) {
+  if (!confirm('¿Quitar este ítem?')) return;
+  const t = trabajos.find(x => x.id === tid);
+  t.items = t.items.filter(i => i.id !== iid);
+  guardar(); render();
+}
+
+// ── Trabajo ───────────────────────────────────────────────
+function eliminar(id) {
+  if (!confirm('¿Eliminar este trabajo completo?')) return;
+  trabajos = trabajos.filter(t => t.id !== id);
+  delete abiertos[id];
+  guardar(); render();
+}
+
+// ── Modal ─────────────────────────────────────────────────
+function abrirModal(id) {
+  editandoId = id || null;
+  const t = id ? trabajos.find(x => x.id === id) : { id: null, cliente: '', obra: '', pedido: '', necesidad: '', pedidoMat: false, materiales: [], items: [] };
+  matModalTemp = [...(t.materiales || [])];
+  document.getElementById('modal-title').textContent = id ? 'Editar trabajo' : 'Nuevo trabajo';
+  document.getElementById('modal-body').innerHTML = `
+    <div class="form-group"><label>Cliente / Quién pide</label><input id="m-cliente" value="${esc(t.cliente)}" placeholder="Nombre del cliente o empresa"></div>
+    <div class="form-group"><label>Obra / Descripción</label><input id="m-obra" value="${esc(t.obra)}" placeholder="Nombre de la obra o trabajo"></div>
+    <div class="form-group"><label>Fecha de pedido</label><input type="date" id="m-pedido" value="${t.pedido || ''}"></div>
+    <div class="form-group"><label>Fecha de necesidad</label><input type="date" id="m-necesidad" value="${t.necesidad || ''}"></div>
+    <div class="form-group full"><label>Pedido de materiales</label>
+      <select id="m-pedidoMat">
+        <option value="0"${!t.pedidoMat ? ' selected' : ''}>❌ No realizado</option>
+        <option value="1"${t.pedidoMat ? ' selected' : ''}>✅ Realizado</option>
+      </select>
+    </div>
+    <div class="form-group full">
+      <label>Lista de materiales</label>
+      <div style="display:flex;gap:6px;margin-bottom:8px">
+        <input id="mm-desc" placeholder="Material o ítem" style="flex:2">
+        <input id="mm-cant" placeholder="Cantidad / medida" style="flex:1">
+        <button class="btn btn-sm" onclick="addMatModal()" type="button"><i class="ti ti-plus"></i></button>
+      </div>
+      <div id="mat-modal-list" class="mat-chips"></div>
+    </div>
+  `;
+  renderMatModal();
+  document.getElementById('modal').classList.add('open');
+}
+
+function renderMatModal() {
+  const el = document.getElementById('mat-modal-list'); if (!el) return;
+  el.innerHTML = matModalTemp.map((m, i) => `<div class="mat-chip">
+    <i class="ti ti-box" style="font-size:12px"></i>
+    ${esc(m.desc)}${m.cant ? ' — ' + esc(m.cant) : ''}
+    <button onclick="quitarMatModal(${i})" type="button" title="Quitar"><i class="ti ti-x"></i></button>
+  </div>`).join('');
+}
+
+function addMatModal() {
+  const d = document.getElementById('mm-desc').value.trim();
+  const c = document.getElementById('mm-cant').value.trim();
+  if (!d) return;
+  matModalTemp.push({ desc: d, cant: c });
+  document.getElementById('mm-desc').value = '';
+  document.getElementById('mm-cant').value = '';
+  renderMatModal();
+}
+
+function quitarMatModal(i) { matModalTemp.splice(i, 1); renderMatModal(); }
+
+function cerrarModal() { document.getElementById('modal').classList.remove('open'); }
+
+document.getElementById('modal').addEventListener('click', e => { if (e.target === document.getElementById('modal')) cerrarModal(); });
+
+function guardarModal() {
+  const cliente = document.getElementById('m-cliente').value.trim();
+  const obra = document.getElementById('m-obra').value.trim();
+  if (!cliente || !obra) { alert('Completá al menos el cliente y la obra.'); return; }
+  if (editandoId) {
+    const t = trabajos.find(x => x.id === editandoId);
+    t.cliente = cliente; t.obra = obra;
+    t.pedido = document.getElementById('m-pedido').value;
+    t.necesidad = document.getElementById('m-necesidad').value;
+    t.pedidoMat = document.getElementById('m-pedidoMat').value === '1';
+    t.materiales = [...matModalTemp];
+  } else {
+    const nuevo = { id: nextId++, cliente, obra, pedido: document.getElementById('m-pedido').value, necesidad: document.getElementById('m-necesidad').value, pedidoMat: document.getElementById('m-pedidoMat').value === '1', materiales: [...matModalTemp], items: [] };
+    trabajos.push(nuevo);
+    abiertos[nuevo.id] = true;
+  }
+  guardar(); cerrarModal(); render();
+}
+
+// ── Init ──────────────────────────────────────────────────
+cargar();
+if (!trabajos.length) {
+  // Ejemplo de demo
+  trabajos = [{
+    id: 1, cliente: 'Municipalidad', obra: 'Escuela N°4 — Aulas', pedido: '2025-05-10', necesidad: '2026-06-10',
+    pedidoMat: true, materiales: [{ desc: 'Perfiles 40x40', cant: '20 barras' }],
+    items: [
+      { id: 1, desc: 'Marco de puerta', total: 4, estado: 'pintado', entregas: [{ fecha: '2025-05-20', cant: 2, nota: 'Turno mañana' }, { fecha: '2025-05-27', cant: 1, nota: '' }] },
+      { id: 2, desc: 'Puerta metálica', total: 4, estado: 'fabricacion', entregas: [{ fecha: '2025-05-20', cant: 1, nota: '' }] },
+      { id: 3, desc: 'Rejilla ventilación', total: 6, estado: 'terminado', entregas: [{ fecha: '2025-05-25', cant: 3, nota: '' }] },
+    ]
+  }];
+  guardar();
+}
+nextId = trabajos.length ? Math.max(...trabajos.map(t => t.id)) + 1 : 1;
+render();
+actualizarBackupInfo();
+</script>
+</body>
+</html>
