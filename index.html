@@ -7,1203 +7,1336 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.10.0/dist/tabler-icons.min.css">
 <style>
 :root{
-  --bg:#F5F2ED;--bg2:#EDE9E2;--bg3:#E4DFD6;
-  --surface:#FDFAF6;--border:#D4CEC4;--border2:#C8C1B5;
-  --text:#1A1714;--text2:#6B6560;--text3:#9B948C;
-  --accent:#2D5016;--accent2:#3A6B1E;--accent-light:#EAF0E3;
-  --danger:#8B2020;--danger-light:#F5E8E8;
-  --warn:#7A4A10;--warn-light:#F5EDE0;
-  --blue:#1A3A5C;--blue-light:#E3EBF4;
-  --purple:#3C2A6B;--purple-light:#EDE8F5;
+  --bg:#1a1d23;--bg2:#22262f;--bg3:#2a2f3a;--bg4:#313745;
+  --surface:#252930;--border:#383e4d;--border2:#444c5e;
+  --text:#e8eaf0;--text2:#9aa3b8;--text3:#636d85;
+  --accent:#4a9e6b;--accent2:#5bb87e;--accent-light:rgba(74,158,107,.15);
+  --red:#d14f4f;--red-light:rgba(209,79,79,.15);
+  --yellow:#d4a017;--yellow-light:rgba(212,160,23,.15);
+  --green:#4a9e6b;--green-light:rgba(74,158,107,.15);
+  --blue:#4a7fc1;--blue-light:rgba(74,127,193,.15);
+  --purple:#8b6fc1;--purple-light:rgba(139,111,193,.15);
   --radius:6px;--radius-lg:10px;
-  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
-  --shadow-md:0 4px 12px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.08);
+  --shadow:0 1px 4px rgba(0,0,0,.3);
+  --shadow-md:0 4px 16px rgba(0,0,0,.4);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Georgia','Times New Roman',serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
 
-/* Header */
-.header{background:var(--accent);color:#fff;padding:0 20px;display:flex;align-items:center;gap:12px;height:56px;box-shadow:0 2px 8px rgba(0,0,0,.2);position:sticky;top:0;z-index:50}
-.header-logo{font-size:17px;font-weight:700;letter-spacing:-.5px;display:flex;align-items:center;gap:8px;margin-right:8px}
-.header-logo i{font-size:22px}
-.header-sub{font-size:11px;opacity:.7;margin-top:1px;font-style:italic}
-.nav-tabs{display:flex;gap:2px;margin-left:4px}
-.nav-tab{height:36px;padding:0 14px;border:none;border-radius:var(--radius);background:transparent;color:rgba(255,255,255,.75);cursor:pointer;font-size:13px;font-family:inherit;display:inline-flex;align-items:center;gap:6px;transition:all .15s;white-space:nowrap}
-.nav-tab:hover{background:rgba(255,255,255,.12);color:#fff}
-.nav-tab.active{background:rgba(255,255,255,.2);color:#fff;font-weight:600}
-.header-right{margin-left:auto;display:flex;gap:8px;align-items:center}
-.ver-badge{font-size:11px;background:rgba(255,255,255,.15);border-radius:4px;padding:2px 7px;font-style:italic}
+/* ── Header ── */
+.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;gap:12px;height:54px;position:sticky;top:0;z-index:50;box-shadow:var(--shadow)}
+.logo{font-size:16px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.logo i{color:var(--accent);font-size:20px}
+.logo-sub{font-size:11px;color:var(--text3);font-weight:400}
+.nav{display:flex;gap:2px;margin-left:10px}
+.nav-btn{height:34px;padding:0 12px;border:none;border-radius:var(--radius);background:transparent;color:var(--text2);cursor:pointer;font-size:13px;font-family:inherit;display:inline-flex;align-items:center;gap:6px;transition:all .15s}
+.nav-btn:hover{background:var(--bg3);color:var(--text)}
+.nav-btn.active{background:var(--bg3);color:var(--accent);font-weight:600}
+.hdr-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.ver{font-size:10px;color:var(--text3);background:var(--bg3);border-radius:4px;padding:2px 6px}
 
-/* Pages */
-.page{display:none}.page.active{display:block}
-.main{max-width:1100px;margin:0 auto;padding:24px 16px}
-
-/* Buttons */
-.btn{height:38px;padding:0 16px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);cursor:pointer;font-size:13px;font-family:inherit;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:all .15s;box-shadow:var(--shadow)}
-.btn:hover{background:var(--bg2);border-color:var(--border2)}
+/* ── Buttons ── */
+.btn{height:36px;padding:0 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg3);color:var(--text);cursor:pointer;font-size:13px;font-family:inherit;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:all .15s}
+.btn:hover{background:var(--bg4);border-color:var(--border2)}
 .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 .btn-primary:hover{background:var(--accent2);border-color:var(--accent2)}
-.btn-danger{color:var(--danger);border-color:var(--danger-light)}
-.btn-danger:hover{background:var(--danger-light)}
-.btn-warn{color:var(--warn);border-color:var(--warn-light)}
-.btn-warn:hover{background:var(--warn-light)}
-.btn-sm{height:30px;padding:0 10px;font-size:12px;box-shadow:none}
-.btn-xs{height:24px;padding:0 8px;font-size:11px;box-shadow:none}
-.btn-save{background:var(--accent);color:#fff;border-color:var(--accent)}
-.btn-save:hover{background:var(--accent2)}
-.btn-icon{width:30px;height:30px;padding:0;justify-content:center}
+.btn-danger{color:var(--red);border-color:transparent}
+.btn-danger:hover{background:var(--red-light);border-color:var(--red)}
+.btn-warn{color:var(--yellow);border-color:transparent}
+.btn-warn:hover{background:var(--yellow-light);border-color:var(--yellow)}
+.btn-sm{height:28px;padding:0 10px;font-size:12px}
+.btn-xs{height:24px;padding:0 8px;font-size:11px}
+.btn-icon{width:28px;height:28px;padding:0;justify-content:center;border-radius:var(--radius)}
+.btn-dl{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-dl:hover{background:#5a8fd1;border-color:#5a8fd1}
 
-/* Toolbar */
+/* ── Layout ── */
+.main{max-width:1100px;margin:0 auto;padding:20px 16px}
+.page{display:none}.page.active{display:block}
+
+/* ── Toolbar ── */
 .toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
-.search-wrap{flex:1;min-width:180px;position:relative}
-.search-wrap i{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:16px;pointer-events:none}
-.search-wrap input{width:100%;height:38px;padding:0 12px 0 34px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font-size:13px;font-family:inherit;transition:border-color .15s}
-.search-wrap input:focus{outline:none;border-color:var(--accent)}
-select.filter-sel{height:38px;padding:0 10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font-size:13px;font-family:inherit;cursor:pointer}
-select.filter-sel:focus{outline:none;border-color:var(--accent)}
+.search-wrap{flex:1;min-width:160px;position:relative}
+.search-wrap i{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:15px;pointer-events:none}
+.search-wrap input{width:100%;height:36px;padding:0 10px 0 32px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font-size:13px;font-family:inherit}
+.search-wrap input:focus,.filter-sel:focus,input:focus,select:focus{outline:none;border-color:var(--accent)}
+.filter-sel{height:36px;padding:0 10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font-size:13px;font-family:inherit;cursor:pointer;min-width:140px}
 
-/* Stats */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:20px}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;box-shadow:var(--shadow)}
-.stat-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.stat-val{font-size:26px;font-weight:700;color:var(--text);line-height:1}
-.stat-val.green{color:var(--accent)}.stat-val.warn{color:var(--warn)}.stat-val.danger{color:var(--danger)}
+/* ── Stats ── */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:16px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 14px}
+.stat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.stat-val{font-size:22px;font-weight:700;line-height:1}
+.sv-green{color:var(--green)}.sv-yellow{color:var(--yellow)}.sv-red{color:var(--red)}.sv-blue{color:var(--blue)}
 
-/* Cards OT */
-.cards{display:flex;flex-direction:column;gap:10px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden;transition:box-shadow .15s}
+/* ── Cards ── */
+.cards{display:flex;flex-direction:column;gap:8px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:box-shadow .15s}
 .card:hover{box-shadow:var(--shadow-md)}
-.card.cerrado{opacity:.65}
-.card-header{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;user-select:none}
-.card-header:hover{background:var(--bg2)}
-.card-num-wrap{display:flex;flex-direction:column;gap:2px;min-width:72px}
-.ot-label{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.03em}
-.obra-ref{font-size:10px;color:var(--text3);font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px}
+.card-hdr{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;user-select:none}
+.card-hdr:hover{background:var(--bg3)}
+.ot-col{display:flex;flex-direction:column;gap:2px;min-width:80px}
+.ot-num{font-size:12px;font-weight:700;color:var(--accent)}
+.ot-ref{font-size:10px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px}
 .card-info{flex:1;min-width:0}
-.card-title{font-size:15px;font-weight:700;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-sub{font-size:12px;color:var(--text2);margin-top:2px;font-style:italic}
-.prog-bar{height:3px;background:var(--bg3);border-radius:2px;margin-top:6px;overflow:hidden;max-width:200px}
-.prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s ease}
-.card-badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.chevron{font-size:18px;color:var(--text3);transition:transform .2s;flex-shrink:0}
+.card-title{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-meta{font-size:11px;color:var(--text2);margin-top:2px}
+.prog-bar{height:2px;background:var(--bg4);border-radius:2px;margin-top:5px;overflow:hidden;max-width:180px}
+.prog-fill{height:100%;border-radius:2px;transition:width .4s}
+.card-right{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.chevron{font-size:17px;color:var(--text3);transition:transform .2s;flex-shrink:0}
 .chevron.open{transform:rotate(180deg)}
 
-/* Badges */
-.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;letter-spacing:.02em}
-.b-espera{background:var(--purple-light);color:var(--purple)}
-.b-fabricacion{background:var(--warn-light);color:var(--warn)}
-.b-terminado{background:var(--blue-light);color:var(--blue)}
-.b-pintado{background:#F5EBE8;color:#6B2010}
-.b-retirar{background:var(--accent-light);color:var(--accent)}
-.b-cerrado{background:var(--bg3);color:var(--text2)}
-.b-si{background:var(--accent-light);color:var(--accent)}
-.b-no{background:var(--danger-light);color:var(--danger)}
-.b-vence{background:var(--danger-light);color:var(--danger)}
+/* ── Semáforos ── */
+.semaforo{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
+.sem-red{background:var(--red-light);color:var(--red);border:1px solid rgba(209,79,79,.3)}
+.sem-yellow{background:var(--yellow-light);color:var(--yellow);border:1px solid rgba(212,160,23,.3)}
+.sem-green{background:var(--green-light);color:var(--green);border:1px solid rgba(74,158,107,.3)}
 
-/* Card body */
+/* ── Card body ── */
 .card-body{padding:0 16px 16px;border-top:1px solid var(--border)}
-.meta-row{display:flex;gap:16px;flex-wrap:wrap;padding:12px 0;font-size:12px;color:var(--text2)}
-.meta-row span{display:flex;align-items:center;gap:5px}
-.meta-row .vence{color:var(--danger);font-weight:600}
-.sect-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 8px;display:flex;align-items:center;gap:6px}
-.sect-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.meta-row{display:flex;gap:14px;flex-wrap:wrap;padding:10px 0;font-size:12px;color:var(--text2)}
+.meta-row span{display:flex;align-items:center;gap:4px}
 
-/* Items table */
-.items-wrap{overflow-x:auto}
-.items-table{width:100%;border-collapse:collapse;font-size:13px;min-width:580px}
-.items-table th{font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:6px 10px;border-bottom:1px solid var(--border);letter-spacing:.04em;text-transform:uppercase;background:var(--bg2)}
-.items-table td{padding:8px 10px;border-bottom:1px solid var(--bg3);vertical-align:top}
-.items-table tr:last-child td{border-bottom:none}
-.items-table tr.item-done td{opacity:.55}
-.item-desc-name{font-weight:600;font-size:13px;margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.item-done-icon{color:var(--accent);font-size:15px}
+/* ── Section title ── */
+.sect{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin:14px 0 8px;display:flex;align-items:center;gap:6px}
+.sect::after{content:'';flex:1;height:1px;background:var(--border)}
 
-/* Entregas */
-.entregas-list{display:flex;flex-direction:column;gap:3px;margin-bottom:6px}
-.entrega-row{display:flex;align-items:center;gap:6px;font-size:12px;background:var(--bg2);border-radius:4px;padding:4px 8px;border:1px solid var(--border)}
-.entrega-fecha{color:var(--text3);min-width:68px;font-style:italic}
-.entrega-cant{font-weight:700;color:var(--accent);min-width:36px}
-.entrega-nota{flex:1;color:var(--text2)}
-.entrega-del{background:none;border:none;cursor:pointer;color:var(--text3);padding:0 2px;display:flex;align-items:center;font-size:14px;margin-left:auto}
-.entrega-del:hover{color:var(--danger)}
-.add-entrega{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:4px}
-.add-entrega input{height:28px;padding:0 8px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font-size:12px;font-family:inherit}
-.add-entrega input:focus{outline:none;border-color:var(--accent)}
-.inp-fecha{width:130px}.inp-cant{width:62px}.inp-nota{flex:1;min-width:90px}
-.item-estado select{height:28px;padding:0 6px;font-size:12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font-family:inherit;cursor:pointer;width:100%}
-.item-estado select:focus{outline:none;border-color:var(--accent)}
-.item-estado select:disabled{opacity:.5;cursor:default}
-.prog-text{font-size:13px;font-weight:700}
-.prog-text.complete{color:var(--accent)}
+/* ── Items table ── */
+.tbl-wrap{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:12px;min-width:640px}
+.tbl th{font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:6px 10px;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:.04em;background:var(--bg3)}
+.tbl td{padding:8px 10px;border-bottom:1px solid var(--bg3);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr.done-row td{opacity:.5}
+.item-name{font-weight:600;font-size:13px;margin-bottom:3px}
+.qty-bar{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.qty-pill{font-size:11px;padding:2px 8px;border-radius:12px;font-weight:600;white-space:nowrap}
+.qp-sol{background:var(--bg4);color:var(--text2)}
+.qp-term{background:var(--blue-light);color:var(--blue);border:1px solid rgba(74,127,193,.3)}
+.qp-ent{background:var(--green-light);color:var(--green);border:1px solid rgba(74,158,107,.3)}
+.item-actions{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
 
-/* Materiales checklist */
-.mat-checklist{display:flex;flex-direction:column;gap:4px;margin-top:6px}
-.mat-check-row{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);transition:all .2s}
-.mat-check-row.llegado{background:var(--accent-light);border-color:#b8d4a0;opacity:.75}
-.mat-check-row.faltante{background:var(--danger-light);border-color:#d4a0a0}
-.mat-check-row input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--accent);flex-shrink:0}
-.mat-check-desc{flex:1;font-size:12px;font-weight:600}
-.mat-check-cant{font-size:12px;color:var(--text3);white-space:nowrap}
-.mat-faltante-tag{font-size:10px;font-weight:700;color:var(--danger);background:var(--danger-light);border:1px solid #d4a0a0;border-radius:3px;padding:1px 5px;text-transform:uppercase}
-.mat-llegado-tag{font-size:10px;font-weight:700;color:var(--accent);background:var(--accent-light);border:1px solid #b8d4a0;border-radius:3px;padding:1px 5px;text-transform:uppercase}
+/* ── Materiales ── */
+.mat-list{display:flex;flex-direction:column;gap:3px;margin-top:6px}
+.mat-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:var(--radius);border:1px solid var(--border)}
+.mat-row.st-pedir{background:var(--red-light);border-color:rgba(209,79,79,.3)}
+.mat-row.st-pedido{background:var(--yellow-light);border-color:rgba(212,160,23,.3)}
+.mat-row.st-recibido{background:var(--green-light);border-color:rgba(74,158,107,.3)}
+.mat-desc{flex:1;font-size:12px;font-weight:500}
+.mat-cant{font-size:11px;color:var(--text3);white-space:nowrap}
+.mat-sel{height:24px;padding:0 6px;font-size:11px;border:1px solid var(--border);border-radius:4px;background:var(--bg3);color:var(--text);font-family:inherit;cursor:pointer}
+.mat-sel:focus{outline:none;border-color:var(--accent)}
 
-/* Card footer */
-.card-footer{display:flex;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+/* ── Historial despachos ── */
+.historial{display:flex;flex-direction:column;gap:4px}
+.hist-row{font-size:12px;padding:7px 10px;background:var(--bg3);border-radius:var(--radius);border:1px solid var(--border);color:var(--text2);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hist-row i{color:var(--text3);flex-shrink:0}
+.hist-remito{font-weight:600;color:var(--text)}
 
-/* ── CLIENTES PAGE ───────────────────────────────── */
-.clientes-layout{display:grid;grid-template-columns:320px 1fr;gap:16px;align-items:start}
-@media(max-width:700px){.clientes-layout{grid-template-columns:1fr}}
-.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden}
-.panel-header{padding:14px 16px;border-bottom:1px solid var(--border);background:var(--bg2);display:flex;align-items:center;justify-content:space-between;gap:8px}
-.panel-header h3{font-size:14px;font-weight:700;display:flex;align-items:center;gap:7px}
-.panel-body{padding:14px 16px}
+/* ── Panel Materiales Globales ── */
+.mat-global-list{display:flex;flex-direction:column;gap:6px}
+.mat-global-row{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg)}
+.mat-global-row.st-pedir{border-left:3px solid var(--red)}
+.mat-global-row.st-pedido{border-left:3px solid var(--yellow)}
+.mg-info{flex:1;min-width:0}
+.mg-desc{font-weight:600;font-size:13px}
+.mg-meta{font-size:11px;color:var(--text3);margin-top:2px}
+.tag{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600}
+.tag-pedir{background:var(--red-light);color:var(--red)}
+.tag-pedido{background:var(--yellow-light);color:var(--yellow)}
+.tag-recibido{background:var(--green-light);color:var(--green)}
 
-/* Cliente list */
-.cliente-list{display:flex;flex-direction:column;gap:4px;max-height:500px;overflow-y:auto}
-.cliente-row{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:var(--radius);border:1px solid transparent;cursor:pointer;transition:all .15s}
-.cliente-row:hover{background:var(--bg2);border-color:var(--border)}
-.cliente-row.selected{background:var(--accent-light);border-color:#b8d4a0}
-.cliente-row-name{flex:1;font-weight:600;font-size:13px}
-.cliente-row-count{font-size:11px;color:var(--text3);white-space:nowrap}
-.cliente-row-actions{display:flex;gap:4px;opacity:0;transition:opacity .15s}
-.cliente-row:hover .cliente-row-actions{opacity:1}
-.cliente-row.selected .cliente-row-actions{opacity:1}
-
-/* Obra list */
-.obra-list{display:flex;flex-direction:column;gap:4px}
-.obra-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg2)}
-.obra-row-name{flex:1;font-size:13px;font-weight:600}
-.obra-row-ots{font-size:11px;color:var(--text3)}
-
-/* Inline add forms */
+/* ── Clientes page ── */
+.cli-layout{display:grid;grid-template-columns:300px 1fr;gap:14px;align-items:start}
+@media(max-width:680px){.cli-layout{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.panel-hdr{padding:12px 14px;border-bottom:1px solid var(--border);background:var(--bg3);display:flex;align-items:center;justify-content:space-between}
+.panel-hdr h3{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;color:var(--text)}
+.panel-body{padding:12px 14px}
+.cli-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--radius);border:1px solid transparent;cursor:pointer;transition:all .15s}
+.cli-row:hover{background:var(--bg3);border-color:var(--border)}
+.cli-row.sel{background:var(--accent-light);border-color:rgba(74,158,107,.4)}
+.cli-name{flex:1;font-weight:500;font-size:13px}
+.cli-count{font-size:11px;color:var(--text3)}
+.cli-acts{display:flex;gap:3px;opacity:0;transition:opacity .15s}
+.cli-row:hover .cli-acts,.cli-row.sel .cli-acts{opacity:1}
+.obra-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg3);margin-bottom:4px}
+.obra-name{flex:1;font-weight:500;font-size:13px}
+.obra-ots{font-size:11px;color:var(--text3)}
 .inline-add{display:flex;gap:6px;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
-.inline-add input{flex:1;height:34px;padding:0 10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:13px;font-family:inherit}
-.inline-add input:focus{outline:none;border-color:var(--accent);background:var(--surface)}
-.empty-state{padding:20px;text-align:center;color:var(--text3);font-size:13px;font-style:italic}
+.inline-add input{flex:1;height:32px;padding:0 10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:13px;font-family:inherit}
+.empty-s{padding:18px;text-align:center;color:var(--text3);font-size:13px}
 
-/* Backup */
-.backup-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:16px;display:none;box-shadow:var(--shadow)}
-.backup-panel.open{display:block}
-.backup-panel h4{font-size:14px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
-.backup-panel p{font-size:12px;color:var(--text2);margin-bottom:12px;font-style:italic}
-.backup-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.backup-version{font-size:11px;color:var(--text3);margin-left:auto;font-style:italic}
-
-/* Empty */
-.empty{padding:3rem;text-align:center;color:var(--text3);font-size:14px;font-style:italic}
-.empty i{font-size:40px;display:block;margin:0 auto 10px;opacity:.4}
-
-/* ── MODAL ──────────────────────────────────────── */
-.modal-bg{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);align-items:flex-start;justify-content:center;z-index:200;overflow-y:auto;padding:20px 10px}
+/* ── Modal ── */
+.modal-bg{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);align-items:flex-start;justify-content:center;z-index:200;overflow-y:auto;padding:20px 10px}
 .modal-bg.open{display:flex}
-.modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;width:680px;max-width:98vw;box-shadow:var(--shadow-md);margin:auto}
-.modal h3{font-size:18px;font-weight:700;margin-bottom:6px;letter-spacing:-.3px;display:flex;align-items:center;gap:8px}
-.modal-subtitle{font-size:12px;color:var(--text3);margin-bottom:18px;font-style:italic}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-group{display:flex;flex-direction:column;gap:5px}
-.form-group.full{grid-column:1/-1}
-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
-input,select,textarea{height:38px;padding:0 10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:13px;font-family:inherit;transition:border-color .15s}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);background:var(--surface)}
-textarea{height:60px;padding:8px 10px;resize:vertical}
-.modal-divider{height:1px;background:var(--border);margin:16px 0}
-.modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;width:660px;max-width:98vw;box-shadow:var(--shadow-md);margin:auto}
+.modal h3{font-size:16px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px;color:var(--text)}
+.modal-sub{font-size:11px;color:var(--text3);margin-bottom:16px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg.full{grid-column:1/-1}
+.fg label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
+input,select,textarea{height:36px;padding:0 10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-size:13px;font-family:inherit;transition:border-color .15s;width:100%}
+textarea{height:56px;padding:8px 10px;resize:vertical}
+.modal-div{height:1px;background:var(--border);margin:14px 0}
+.modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
 
-/* OT items inside modal */
-.ot-items-preview{margin-top:10px;display:flex;flex-direction:column;gap:6px}
-.ot-item-preview-row{display:flex;align-items:flex-start;gap:8px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px}
-.ot-item-preview-info{flex:1;min-width:0}
-.ot-item-preview-name{font-weight:600;font-size:13px}
-.ot-item-preview-sub{font-size:12px;color:var(--text2);margin-top:2px}
-.ot-item-preview-mats{margin-top:5px;display:flex;flex-direction:column;gap:2px}
-.ot-item-preview-mat{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:4px}
-.ot-item-del{background:none;border:none;cursor:pointer;color:var(--text3);padding:4px;display:flex;align-items:center;flex-shrink:0}
-.ot-item-del:hover{color:var(--danger)}
-.no-items-msg{text-align:center;color:var(--text3);font-size:12px;padding:12px;font-style:italic;background:var(--bg2);border-radius:var(--radius);border:1px dashed var(--border)}
+/* OT items preview */
+.ot-preview{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.ot-prev-row{display:flex;align-items:flex-start;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:9px 12px}
+.ot-prev-info{flex:1;min-width:0}
+.ot-prev-name{font-weight:600;font-size:13px}
+.ot-prev-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.ot-prev-mats{margin-top:4px;display:flex;flex-direction:column;gap:2px}
+.ot-prev-mat{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:4px}
+.ot-prev-del{background:none;border:none;cursor:pointer;color:var(--text3);padding:4px;display:flex;align-items:center;flex-shrink:0}
+.ot-prev-del:hover{color:var(--red)}
+.no-items{text-align:center;color:var(--text3);font-size:12px;padding:10px;background:var(--bg3);border-radius:var(--radius);border:1px dashed var(--border)}
 
 /* Add item block */
-.add-item-block{background:var(--bg2);border:1px dashed var(--border2);border-radius:var(--radius);padding:14px;margin-top:10px}
-.add-item-block-title{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.add-item-block-fields{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px}
-.add-item-block-fields .fg{display:flex;flex-direction:column;gap:4px}
-.add-item-block-fields label{font-size:10px}
-.add-item-block-fields input,.add-item-block-fields select{height:34px;font-size:12px}
-.mat-add-area{border-top:1px solid var(--border);padding-top:10px;margin-top:6px}
-.mat-add-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
-.mat-add-fields{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.mat-add-fields input{height:30px;font-size:12px;padding:0 8px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font-family:inherit}
-.mat-add-fields input:focus{outline:none;border-color:var(--accent)}
-.temp-mat-list{margin-top:6px;display:flex;flex-direction:column;gap:3px}
-.temp-mat-row{display:flex;align-items:center;gap:6px;font-size:12px;padding:4px 8px;background:var(--surface);border:1px solid var(--border);border-radius:4px}
-.temp-mat-row span{flex:1}
-.temp-mat-del{background:none;border:none;cursor:pointer;color:var(--text3);display:flex;align-items:center;font-size:14px}
-.temp-mat-del:hover{color:var(--danger)}
+.add-block{background:var(--bg3);border:1px dashed var(--border2);border-radius:var(--radius);padding:12px;margin-top:10px}
+.add-block-title{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.add-block-fields{display:flex;gap:7px;flex-wrap:wrap;align-items:flex-end}
+.add-block-fields .fg{display:flex;flex-direction:column;gap:3px}
+.add-block-fields label{font-size:10px}
+.add-block-fields input,.add-block-fields select{height:32px;font-size:12px}
+.mat-add-area{border-top:1px solid var(--border);padding-top:8px;margin-top:8px}
+.mat-add-title{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.mat-add-row{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+.mat-add-row input{height:28px;font-size:12px}
+.tmp-mat-list{margin-top:5px;display:flex;flex-direction:column;gap:3px}
+.tmp-mat-row{display:flex;align-items:center;gap:6px;font-size:12px;padding:4px 8px;background:var(--bg4);border-radius:4px}
+.tmp-mat-row span{flex:1}
+.tmp-mat-del{background:none;border:none;cursor:pointer;color:var(--text3);display:flex;align-items:center;font-size:13px}
+.tmp-mat-del:hover{color:var(--red)}
 
-/* Add item from card */
-.add-from-card{margin-top:10px;padding:12px;background:var(--bg2);border-radius:var(--radius);border:1px dashed var(--border2)}
-.add-from-card-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
-.add-from-card-fields{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.add-from-card-fields input,.add-from-card-fields select{height:32px;padding:0 8px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font-size:12px;font-family:inherit}
-.add-from-card-fields input:focus,.add-from-card-fields select:focus{outline:none;border-color:var(--accent)}
+/* Card footer */
+.card-footer{display:flex;gap:6px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);flex-wrap:wrap}
 
-@media(max-width:600px){
-  .header-sub{display:none}
+/* Add item in card */
+.add-card-block{margin-top:8px;padding:10px;background:var(--bg3);border-radius:var(--radius);border:1px dashed var(--border2)}
+.add-card-lbl{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.add-card-fields{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.add-card-fields input,.add-card-fields select{height:30px;padding:0 8px;font-size:12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:inherit}
+
+/* empty */
+.empty{padding:2.5rem;text-align:center;color:var(--text3);font-size:14px}
+.empty i{font-size:36px;display:block;margin:0 auto 10px;opacity:.3}
+
+/* ── Cantidades materiales ── */
+.mat-qty{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
+.mat-qty-block{display:flex;flex-direction:column;gap:1px;align-items:center}
+.mat-qty-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.04em}
+.mat-qty-val{font-size:12px;font-weight:700}
+.mat-qty-input{width:56px;height:24px;padding:0 6px;font-size:12px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text);text-align:center;font-family:inherit}
+.mat-qty-input:focus{outline:none;border-color:var(--accent)}
+.mat-faltante{font-size:11px;font-weight:700;color:var(--red);background:var(--red-light);border:1px solid rgba(209,79,79,.3);border-radius:4px;padding:2px 6px;white-space:nowrap}
+.mat-faltante.ok{color:var(--green);background:var(--green-light);border-color:rgba(74,158,107,.3)}
+
+/* ── PRINT ── */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  body { background: #fff !important; color: #000 !important; font-family: Arial, sans-serif; font-size: 11pt; }
+  .header, .nav, .toolbar, .stats, .hdr-right, .card-hdr .chevron,
+  .item-actions, .add-card-block, .card-footer, .btn, .mat-sel,
+  .mat-qty-input, #page-materiales, #page-clientes { display: none !important; }
+  .page { display: block !important; }
+  .card { border: 1px solid #ccc !important; box-shadow: none !important; background: #fff !important; break-inside: avoid; margin-bottom: 20px; }
+  .card-hdr { background: #f0f0f0 !important; cursor: default; padding: 10px 14px; }
+  .card-body { display: block !important; padding: 10px 14px 14px; }
+  .ot-num { color: #2a6e45 !important; font-size: 13pt; }
+  .card-title { font-size: 13pt; color: #000 !important; }
+  .card-meta, .meta-row { color: #444 !important; font-size: 10pt; }
+  .semaforo { border: 1px solid #999 !important; }
+  .sem-green { background: #d4edda !important; color: #155724 !important; }
+  .sem-yellow { background: #fff3cd !important; color: #856404 !important; }
+  .sem-red { background: #f8d7da !important; color: #721c24 !important; }
+  .tbl { font-size: 10pt; }
+  .tbl th { background: #eee !important; color: #333 !important; border-bottom: 1px solid #ccc !important; }
+  .tbl td { border-bottom: 1px solid #eee !important; }
+  .tbl tr.done-row td { opacity: 1 !important; background: #f9f9f9 !important; }
+  .qty-pill { border: 1px solid #ccc !important; background: #f5f5f5 !important; color: #333 !important; }
+  .qp-term { background: #e8f0fb !important; color: #1a3a5c !important; }
+  .qp-ent  { background: #d4edda !important; color: #155724 !important; }
+  .mat-row { border: 1px solid #ccc !important; background: #fff !important; }
+  .mat-row.st-pedir  { background: #f8d7da !important; border-left: 3px solid #dc3545 !important; }
+  .mat-row.st-pedido { background: #fff3cd !important; border-left: 3px solid #ffc107 !important; }
+  .mat-row.st-recibido { background: #d4edda !important; border-left: 3px solid #28a745 !important; }
+  .mat-faltante { background: #f8d7da !important; color: #721c24 !important; }
+  .mat-faltante.ok { background: #d4edda !important; color: #155724 !important; }
+  .hist-row { background: #f5f5f5 !important; border: 1px solid #ddd !important; color: #333 !important; }
+  .tag-pedir  { background: #f8d7da !important; color: #721c24 !important; }
+  .tag-pedido { background: #fff3cd !important; color: #856404 !important; }
+  .prog-bar, .prog-fill { display: none !important; }
+  .sect::after { background: #ccc !important; }
+  .print-only { display: block !important; }
+  /* Solo imprimir la card que se pidió */
+  .card.no-print { display: none !important; }
+}
+.print-only { display: none; }
+
+@media(max-width:580px){
+  .logo-sub{display:none}
   .form-grid{grid-template-columns:1fr}
-  .form-group.full{grid-column:1}
-  .nav-tab span{display:none}
+  .fg.full{grid-column:1}
 }
 </style>
 </head>
 <body>
 
 <header class="header">
-  <div class="header-logo">
+  <div class="logo">
     <i class="ti ti-tools"></i>
-    <div>
-      <div>Planilla de Taller</div>
-      <div class="header-sub">Control de trabajos y entregas</div>
-    </div>
+    <div><div>Taller</div><div class="logo-sub">Gestión de OTs</div></div>
   </div>
-  <nav class="nav-tabs">
-    <button class="nav-tab active" onclick="showPage('ots')" id="tab-ots">
-      <i class="ti ti-clipboard-list"></i><span>Órdenes de Trabajo</span>
-    </button>
-    <button class="nav-tab" onclick="showPage('clientes')" id="tab-clientes">
-      <i class="ti ti-users"></i><span>Clientes y Obras</span>
-    </button>
+  <nav class="nav">
+    <button class="nav-btn active" onclick="goPage('ots')" id="tab-ots"><i class="ti ti-clipboard-list"></i> Órdenes</button>
+    <button class="nav-btn" onclick="goPage('materiales')" id="tab-materiales"><i class="ti ti-package"></i> Materiales <span id="mat-badge" style="display:none;background:var(--red);color:#fff;border-radius:10px;padding:0 5px;font-size:10px;margin-left:2px"></span></button>
+    <button class="nav-btn" onclick="goPage('clientes')" id="tab-clientes"><i class="ti ti-users"></i> Clientes</button>
   </nav>
-  <div class="header-right">
-    <button class="btn btn-sm" onclick="toggleBackup()" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff">
-      <i class="ti ti-database"></i><span style="display:none" class="d-sm">Backup</span>
-    </button>
-    <span class="ver-badge">v3.0</span>
+  <div class="hdr-right">
+    <button class="btn btn-sm btn-dl" onclick="descargarHTML()"><i class="ti ti-download"></i> Descargar HTML</button>
+    <span class="ver">v4.0</span>
   </div>
 </header>
 
-<!-- ══ PAGE: OTs ═══════════════════════════════════════ -->
+<!-- ══ PAGE OTs ══════════════════════════════════════════ -->
 <div id="page-ots" class="page active">
 <div class="main">
-
-  <div class="backup-panel" id="backup-panel">
-    <h4><i class="ti ti-database"></i> Backup y datos</h4>
-    <p>Exportá tus datos para hacer una copia de seguridad, o importá un backup anterior. Los datos se guardan automáticamente en el navegador.</p>
-    <div class="backup-actions">
-      <button class="btn btn-sm" onclick="exportar()"><i class="ti ti-download"></i> Exportar</button>
-      <label class="btn btn-sm" style="cursor:pointer"><i class="ti ti-upload"></i> Importar
-        <input type="file" accept=".json" onchange="importar(this)" style="display:none">
-      </label>
-      <button class="btn btn-sm btn-danger" onclick="limpiarTodo()"><i class="ti ti-trash"></i> Limpiar todo</button>
-      <span class="backup-version" id="backup-info"></span>
-    </div>
-  </div>
-
   <div class="toolbar">
     <div class="search-wrap">
       <i class="ti ti-search"></i>
-      <input type="text" id="buscar" placeholder="Buscar por cliente, obra, OT..." oninput="renderOTs()">
+      <input type="text" id="buscar" placeholder="Buscar cliente, OT, remito..." oninput="renderOTs()">
     </div>
-    <select class="filter-sel" id="filtroEstado" onchange="renderOTs()">
-      <option value="">Todos los trabajos</option>
-      <option value="activo">Activos</option>
-      <option value="cerrado">Cerrados</option>
+    <select class="filter-sel" id="filtro-obra" onchange="renderOTs()">
+      <option value="">Todas las obras</option>
+    </select>
+    <select class="filter-sel" id="filtro-estado" onchange="renderOTs()">
+      <option value="">Todos los estados</option>
+      <option value="pendiente">🔴 Pendiente</option>
+      <option value="parcial">🟡 Parcial</option>
+      <option value="cerrada">🟢 Cerrada</option>
     </select>
     <button class="btn btn-primary" onclick="abrirModalOT()"><i class="ti ti-plus"></i> Nueva OT</button>
   </div>
-
   <div class="stats" id="stats"></div>
   <div class="cards" id="cards"></div>
 </div>
 </div>
 
-<!-- ══ PAGE: Clientes y Obras ══════════════════════════ -->
+<!-- ══ PAGE MATERIALES ═══════════════════════════════════ -->
+<div id="page-materiales" class="page">
+<div class="main">
+  <div class="toolbar">
+    <div class="search-wrap">
+      <i class="ti ti-search"></i>
+      <input type="text" id="buscar-mat" placeholder="Buscar material..." oninput="renderMateriales()">
+    </div>
+    <select class="filter-sel" id="filtro-mat-estado" onchange="renderMateriales()">
+      <option value="">Por Pedir + Pedido</option>
+      <option value="pedir">Solo Por Pedir</option>
+      <option value="pedido">Solo Pedido/En Espera</option>
+    </select>
+  </div>
+  <div class="stats" id="stats-mat"></div>
+  <div id="mat-global-list" class="mat-global-list"></div>
+</div>
+</div>
+
+<!-- ══ PAGE CLIENTES ════════════════════════════════════ -->
 <div id="page-clientes" class="page">
 <div class="main">
-  <div class="clientes-layout">
-
-    <!-- Panel izquierdo: clientes -->
+  <div class="cli-layout">
     <div class="panel">
-      <div class="panel-header">
+      <div class="panel-hdr">
         <h3><i class="ti ti-building" style="color:var(--accent)"></i> Clientes</h3>
-        <span id="clientes-count" style="font-size:11px;color:var(--text3)"></span>
+        <span style="font-size:11px;color:var(--text3)" id="cli-count"></span>
       </div>
       <div class="panel-body">
-        <div class="cliente-list" id="cliente-list"></div>
+        <div id="cli-list"></div>
         <div class="inline-add">
-          <input id="nuevo-cliente-input" placeholder="Nombre del cliente..." onkeydown="if(event.key==='Enter')addCliente()">
+          <input id="new-cli-input" placeholder="Nombre del cliente..." onkeydown="if(event.key==='Enter')addCliente()">
           <button class="btn btn-sm btn-primary" onclick="addCliente()"><i class="ti ti-plus"></i> Agregar</button>
         </div>
       </div>
     </div>
-
-    <!-- Panel derecho: obras del cliente seleccionado -->
-    <div class="panel" id="obras-panel">
-      <div class="panel-header">
-        <h3 id="obras-panel-title"><i class="ti ti-building-community" style="color:var(--accent)"></i> Obras</h3>
+    <div class="panel">
+      <div class="panel-hdr">
+        <h3 id="obras-title"><i class="ti ti-building-community" style="color:var(--accent)"></i> Obras</h3>
       </div>
-      <div class="panel-body" id="obras-panel-body">
-        <div class="empty-state"><i class="ti ti-arrow-left" style="font-size:20px;display:block;margin:0 auto 8px;opacity:.4"></i>Seleccioná un cliente para ver sus obras</div>
+      <div class="panel-body" id="obras-body">
+        <div class="empty-s">Seleccioná un cliente para ver sus obras</div>
       </div>
     </div>
-
   </div>
 </div>
 </div>
 
-<!-- ══ MODAL OT ════════════════════════════════════════ -->
+<!-- ══ MODAL OT ══════════════════════════════════════════ -->
 <div class="modal-bg" id="modal-ot">
-  <div class="modal" role="dialog" aria-modal="true">
-    <h3 id="modal-ot-title"><i class="ti ti-clipboard-list"></i> Nueva Orden de Trabajo</h3>
-    <div class="modal-subtitle" id="modal-ot-subtitle">Completá los datos generales y agregá los ítems antes de guardar.</div>
+<div class="modal">
+  <h3 id="mot-title"><i class="ti ti-clipboard-list"></i> Nueva Orden de Trabajo</h3>
+  <div class="modal-sub" id="mot-sub">Completá los datos y agregá los trabajos.</div>
+  <div class="form-grid">
+    <div class="fg">
+      <label>Cliente</label>
+      <select id="m-cliente" onchange="onClienteChange()">
+        <option value="">— Seleccionar —</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>Obra</label>
+      <select id="m-obra"><option value="">— Seleccionar —</option></select>
+    </div>
+    <div class="fg">
+      <label>N° Pedido / Remito de Obra <span style="font-weight:400;color:var(--text3)">(del cliente)</span></label>
+      <input id="m-ref" placeholder="Ej: PO-045, Remito 00123...">
+    </div>
+    <div class="fg">
+      <label>Fecha</label>
+      <input type="date" id="m-fecha">
+    </div>
+  </div>
 
-    <div class="form-grid">
-      <div class="form-group">
-        <label>Cliente</label>
-        <select id="m-cliente" onchange="onClienteChange()">
-          <option value="">— Seleccionar cliente —</option>
+  <div class="modal-div"></div>
+
+  <div style="font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px;color:var(--text)">
+    <i class="ti ti-list-details" style="color:var(--accent)"></i> Trabajos de la OT
+    <span id="items-badge" style="font-size:10px;background:var(--bg4);border-radius:10px;padding:1px 8px;color:var(--text3);font-weight:400"></span>
+  </div>
+  <div id="ot-preview" class="ot-preview"></div>
+
+  <div class="add-block" id="add-block">
+    <div class="add-block-title"><i class="ti ti-plus-square"></i> Agregar trabajo a esta OT</div>
+    <div class="add-block-fields">
+      <div class="fg" style="flex:3;min-width:150px"><label>Descripción</label><input id="ni-desc" placeholder="Ej: Marco de puerta, Portón..."></div>
+      <div class="fg" style="width:68px"><label>Cantidad</label><input id="ni-cant" type="number" min="1" placeholder="0"></div>
+      <div class="fg" style="min-width:140px"><label>Estado inicial</label>
+        <select id="ni-est">
+          <option value="pendiente">Pendiente</option>
+          <option value="fabricacion">En fabricación</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>Obra</label>
-        <select id="m-obra">
-          <option value="">— Seleccionar obra —</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Fecha de pedido</label>
-        <input type="date" id="m-pedido">
-      </div>
-      <div class="form-group">
-        <label>Fecha de necesidad</label>
-        <input type="date" id="m-necesidad">
-      </div>
-      <div class="form-group full">
-        <label>N° de Pedido / Remito de Obra <span style="font-weight:400;font-style:italic;font-size:10px">(referencia del cliente — opcional)</span></label>
-        <input id="m-refobra" placeholder="Ej: PO-2024-045, Remito 00123...">
-      </div>
-      <div class="form-group full">
-        <label>Pedido de materiales</label>
-        <select id="m-pedidoMat">
-          <option value="0">❌ No realizado</option>
-          <option value="1">✅ Realizado</option>
-        </select>
-      </div>
     </div>
-
-    <div class="modal-divider"></div>
-
-    <div style="font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px">
-      <i class="ti ti-list-details" style="color:var(--accent)"></i>
-      Ítems de la Orden de Trabajo
-      <span id="items-count-badge" style="font-size:11px;background:var(--bg3);border-radius:10px;padding:1px 8px;color:var(--text2);font-weight:400"></span>
-    </div>
-
-    <div id="ot-items-preview" class="ot-items-preview"></div>
-
-    <div class="add-item-block" id="add-item-block">
-      <div class="add-item-block-title"><i class="ti ti-plus-square"></i> Agregar ítem a esta OT</div>
-      <div class="add-item-block-fields">
-        <div class="fg" style="flex:3;min-width:160px">
-          <label>Descripción del ítem</label>
-          <input id="ni-desc" placeholder="Ej: Marco de puerta, Rejilla, Portón...">
-        </div>
-        <div class="fg" style="width:70px">
-          <label>Cantidad</label>
-          <input id="ni-cant" type="number" min="1" placeholder="0">
-        </div>
-        <div class="fg" style="min-width:150px">
-          <label>Estado inicial</label>
-          <select id="ni-est">
-            <option value="espera">Esperando material</option>
-            <option value="fabricacion">En fabricación</option>
-            <option value="terminado">Terminado</option>
-            <option value="pintado">Pintado</option>
-            <option value="retirar">Para retirar</option>
-          </select>
-        </div>
+    <div class="mat-add-area">
+      <div class="mat-add-title"><i class="ti ti-package" style="font-size:11px"></i> Materiales del trabajo <span style="font-weight:400;color:var(--text3)">(opcional)</span></div>
+      <div class="mat-add-row">
+        <input id="ni-mat-d" placeholder="Material (ej: Caño 40x40...)" style="flex:3;min-width:140px">
+        <input id="ni-mat-c" placeholder="Cantidad" style="width:85px">
+        <button class="btn btn-sm" type="button" onclick="addMatTemp()"><i class="ti ti-plus"></i></button>
       </div>
-      <div class="mat-add-area">
-        <div class="mat-add-title"><i class="ti ti-package" style="font-size:12px"></i> Materiales necesarios <span style="font-weight:400;font-style:italic">(opcional)</span></div>
-        <div class="mat-add-fields">
-          <input id="ni-mat-desc" placeholder="Material (ej: Caño 40x40, Planchuela...)" style="flex:3;min-width:160px">
-          <input id="ni-mat-cant" placeholder="Cantidad" style="width:90px">
-          <button class="btn btn-sm" type="button" onclick="addMatTemp()"><i class="ti ti-plus"></i> Agregar</button>
-        </div>
-        <div id="temp-mat-list" class="temp-mat-list"></div>
-      </div>
-      <div style="margin-top:12px;display:flex;justify-content:flex-end">
-        <button class="btn btn-warn" type="button" onclick="agregarItemAOT()">
-          <i class="ti ti-circle-plus"></i> Agregar trabajo a la OT
-        </button>
-      </div>
+      <div id="tmp-mat-list" class="tmp-mat-list"></div>
     </div>
+    <div style="margin-top:10px;display:flex;justify-content:flex-end">
+      <button class="btn btn-warn" type="button" onclick="agregarItemOT()"><i class="ti ti-circle-plus"></i> Agregar trabajo a la OT</button>
+    </div>
+  </div>
 
-    <div class="modal-footer">
-      <button class="btn" onclick="cerrarModalOT()">Cancelar</button>
-      <button class="btn btn-save" onclick="guardarModalOT()"><i class="ti ti-device-floppy"></i> Guardar Orden de Trabajo</button>
-    </div>
+  <div class="modal-footer">
+    <button class="btn" onclick="cerrarModalOT()">Cancelar</button>
+    <button class="btn btn-primary" onclick="guardarModalOT()"><i class="ti ti-device-floppy"></i> Guardar OT</button>
   </div>
 </div>
+</div>
 
-<!-- ══ MODAL editar cliente/obra ══════════════════════ -->
-<div class="modal-bg" id="modal-edit-nombre">
-  <div class="modal" style="width:400px" role="dialog" aria-modal="true">
-    <h3 id="men-title"><i class="ti ti-edit"></i> Renombrar</h3>
-    <div style="margin-top:14px">
-      <div class="form-group">
-        <label id="men-label">Nombre</label>
-        <input id="men-input" placeholder="">
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn" onclick="cerrarModalEditNombre()">Cancelar</button>
-      <button class="btn btn-save" onclick="guardarEditNombre()"><i class="ti ti-device-floppy"></i> Guardar</button>
-    </div>
+<!-- ══ MODAL FABRICACIÓN ═════════════════════════════════ -->
+<div class="modal-bg" id="modal-fab">
+<div class="modal" style="width:420px">
+  <h3><i class="ti ti-hammer" style="color:var(--blue)"></i> Actualizar Fabricación</h3>
+  <div class="modal-sub" id="fab-sub"></div>
+  <div class="form-grid" style="grid-template-columns:1fr">
+    <div class="fg"><label>Unidades fabricadas a agregar</label><input id="fab-cant" type="number" min="1" placeholder="0"></div>
+    <div class="fg"><label>Nota (opcional)</label><input id="fab-nota" placeholder="Ej: Lote 1, Turno mañana..."></div>
   </div>
+  <div style="margin-top:10px;padding:8px 10px;background:var(--bg3);border-radius:var(--radius);font-size:12px;color:var(--text2)" id="fab-info"></div>
+  <div class="modal-footer">
+    <button class="btn" onclick="cerrarModalFab()">Cancelar</button>
+    <button class="btn btn-primary" onclick="guardarFab()"><i class="ti ti-check"></i> Confirmar</button>
+  </div>
+</div>
+</div>
+
+<!-- ══ MODAL ENTREGA ════════════════════════════════════ -->
+<div class="modal-bg" id="modal-ent">
+<div class="modal" style="width:480px">
+  <h3><i class="ti ti-truck" style="color:var(--green)"></i> Registrar Entrega</h3>
+  <div class="modal-sub" id="ent-sub"></div>
+  <div class="form-grid">
+    <div class="fg full"><label>N° de Remito de Salida <span style="color:var(--red)">*</span></label><input id="ent-remito" placeholder="Ej: R-0042, Remito 00156..."></div>
+    <div class="fg"><label>Fecha de entrega <span style="color:var(--red)">*</span></label><input type="date" id="ent-fecha"></div>
+    <div class="fg"><label>Nombre de quién retira <span style="color:var(--red)">*</span></label><input id="ent-quien" placeholder="Nombre y apellido"></div>
+    <div class="fg full"><label>Cantidad a entregar <span style="color:var(--red)">*</span></label><input id="ent-cant" type="number" min="1" placeholder="0"></div>
+  </div>
+  <div style="margin-top:10px;padding:8px 10px;background:var(--bg3);border-radius:var(--radius);font-size:12px;color:var(--text2)" id="ent-info"></div>
+  <div class="modal-footer">
+    <button class="btn" onclick="cerrarModalEnt()">Cancelar</button>
+    <button class="btn btn-primary" onclick="guardarEnt()"><i class="ti ti-truck"></i> Confirmar entrega</button>
+  </div>
+</div>
+</div>
+
+<!-- ══ MODAL editar nombre ═══════════════════════════════ -->
+<div class="modal-bg" id="modal-edit">
+<div class="modal" style="width:380px">
+  <h3 id="medit-title"><i class="ti ti-edit"></i> Renombrar</h3>
+  <div style="margin-top:14px">
+    <div class="fg"><label id="medit-lbl">Nombre</label><input id="medit-input"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" onclick="cerrarModalEdit()">Cancelar</button>
+    <button class="btn btn-primary" onclick="guardarEdit()"><i class="ti ti-device-floppy"></i> Guardar</button>
+  </div>
+</div>
 </div>
 
 <script>
-const VERSION = '3.0';
-const KEY_OTS = 'taller_ots_v3';
-const KEY_CLI = 'taller_clientes_v3';
+// ════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════
+const VER = '4.0';
+const KEY_OTS = 'taller_ots_v4';
+const KEY_CLI = 'taller_cli_v4';
 
-const ESTADOS_ITEM = {
-  espera:'Esperando material', fabricacion:'En fabricación',
-  terminado:'Terminado', pintado:'Pintado', retirar:'Para retirar'
-};
+let ots = [];
+let clientes = [];
+let selCliId = null;
 
-// ── State ─────────────────────────────────────────────────
-let ots = [];           // Órdenes de trabajo
-let clientes = [];      // [{id, nombre, obras:[{id,nombre}]}]
-let selectedClienteId = null;
+// Modal temporaries
+let editOTId = null;
+let modItems = [];   // items being built in modal
+let modMats = [];    // mats for current item being built
+let fabCtx = null;   // {otId, itemId}
+let entCtx = null;   // {otId, itemId}
+let editCtx = null;  // {type, cliId, obraId}
 
-let editandoOTId = null;
-let modalItemsTemp = [];
-let modalMatTemp = [];
-let abiertos = {};
-let nextOTNum = 1;
 let nextOTId = 1;
+let nextOTNum = 1;
 
-// Edit nombre modal
-let editNombreCtx = null; // {type:'cliente'|'obra', clienteId, obraId}
-
-// ── Navigation ────────────────────────────────────────────
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
-  document.getElementById('tab-' + name).classList.add('active');
-  if (name === 'clientes') renderClientes();
+// ════════════════════════════════════════════════════════
+// PERSISTENCE
+// ════════════════════════════════════════════════════════
+function save() {
+  try { localStorage.setItem(KEY_OTS, JSON.stringify({ v: VER, data: ots, ts: Date.now() })); } catch(e){}
+  try { localStorage.setItem(KEY_CLI, JSON.stringify(clientes)); } catch(e){}
 }
-
-// ── Storage ───────────────────────────────────────────────
-function guardarOTs() {
-  try { localStorage.setItem(KEY_OTS, JSON.stringify({ version: VERSION, datos: ots, ts: new Date().toISOString() })); } catch(e) {}
-  actualizarBackupInfo();
+function load() {
+  try { const r = localStorage.getItem(KEY_OTS); if(r){ const o=JSON.parse(r); ots=o.data||o; } } catch(e){}
+  try { const r = localStorage.getItem(KEY_CLI); if(r) clientes=JSON.parse(r); } catch(e){}
 }
-function guardarClientes() {
-  try { localStorage.setItem(KEY_CLI, JSON.stringify(clientes)); } catch(e) {}
-}
-function cargarTodo() {
-  try {
-    const ro = localStorage.getItem(KEY_OTS);
-    if (ro) { const o = JSON.parse(ro); ots = o.datos || o; }
-  } catch(e) {}
-  try {
-    const rc = localStorage.getItem(KEY_CLI);
-    if (rc) clientes = JSON.parse(rc);
-  } catch(e) {}
-}
-function actualizarBackupInfo() {
-  try {
-    const raw = localStorage.getItem(KEY_OTS);
-    if (!raw) return;
-    const obj = JSON.parse(raw);
-    const ts = obj.ts ? new Date(obj.ts).toLocaleString('es-AR') : '—';
-    document.getElementById('backup-info').textContent = `Último guardado: ${ts} · ${ots.length} OTs`;
-  } catch(e) {}
+function recalcIds() {
+  nextOTId  = ots.length ? Math.max(...ots.map(t=>t.id))+1 : 1;
+  nextOTNum = ots.length ? Math.max(...ots.map(t=>t.otNum||0))+1 : 1;
 }
 
-// ── Backup ────────────────────────────────────────────────
-function toggleBackup() { document.getElementById('backup-panel').classList.toggle('open'); actualizarBackupInfo(); }
-function exportar() {
-  const data = { version: VERSION, exportado: new Date().toISOString(), ots, clientes };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = `taller_backup_${new Date().toISOString().slice(0,10)}.json`; a.click();
-}
-function importar(input) {
-  const file = input.files[0]; if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const obj = JSON.parse(e.target.result);
-      if (!confirm(`¿Importar backup? Esto reemplaza los datos actuales.`)) return;
-      ots = obj.ots || obj.datos || [];
-      clientes = obj.clientes || [];
-      recalcNextIds(); guardarOTs(); guardarClientes(); renderOTs();
-      alert('Backup importado correctamente.');
-    } catch(err) { alert('Error al leer el archivo.'); }
-  };
-  reader.readAsText(file); input.value = '';
-}
-function limpiarTodo() {
-  if (!confirm('¿Eliminar TODOS los datos?')) return;
-  if (!confirm('Segunda confirmación: ¿estás seguro?')) return;
-  ots = []; clientes = []; nextOTNum = 1; nextOTId = 1; abiertos = {};
-  guardarOTs(); guardarClientes(); renderOTs();
+// Descargar HTML con datos embebidos
+function descargarHTML() {
+  const snapshot = { v: VER, data: ots, ts: Date.now() };
+  const cliSnap  = JSON.stringify(clientes);
+  const otSnap   = JSON.stringify(snapshot);
+  // Read current file and inject data into the init block
+  const html = document.documentElement.outerHTML;
+  // Replace the init call to inject fresh data
+  const marker = '/* __SNAPSHOT__ */';
+  let injected = html;
+  if (html.includes(marker)) {
+    injected = html.replace(/\/\* __SNAPSHOT__ \*\/[\s\S]*?\/\* __SNAPSHOT_END__ \*\//,
+      `/* __SNAPSHOT__ */\nots=${otSnap.replace(/\\/g,'\\\\').replace(/`/g,'\\`')};\nclientes=${cliSnap.replace(/\\/g,'\\\\').replace(/`/g,'\\`')};\n/* __SNAPSHOT_END__ */`);
+  }
+  const blob = new Blob([injected], {type:'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `taller_${new Date().toISOString().slice(0,10)}.html`;
+  a.click();
 }
 
-// ── Helpers ───────────────────────────────────────────────
-function fmt(d) { if (!d) return '—'; const [y,m,dd] = d.split('-'); return `${dd}/${m}/${y}`; }
-function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function hoyISO() { return new Date().toISOString().slice(0,10); }
-function otLabel(n) { return 'OT-' + String(n).padStart(4,'0'); }
-function entregadoItem(it) { return (it.entregas||[]).reduce((s,e) => s + Number(e.cant), 0); }
-function itemCompleto(it) { return entregadoItem(it) >= it.total; }
-function otCerrada(t) { return t.items.length > 0 && t.items.every(it => itemCompleto(it)); }
-function progOT(t) {
-  const tot = t.items.reduce((s,it) => s + it.total, 0);
-  const ent = t.items.reduce((s,it) => s + entregadoItem(it), 0);
-  return tot > 0 ? Math.round(ent / tot * 100) : 0;
-}
-function estadoPrincipal(t) {
-  if (!t.items.length) return 'espera';
-  const orden = ['fabricacion','espera','pintado','terminado','retirar'];
-  for (const e of orden) { if (t.items.some(i => i.estado === e && !itemCompleto(i))) return e; }
-  return t.items[0].estado;
-}
-function matFaltantes(it) { return (it.materiales||[]).filter(m => !m.llegado).length; }
-function recalcNextIds() {
-  nextOTId   = ots.length ? Math.max(...ots.map(t => t.id)) + 1 : 1;
-  nextOTNum  = ots.length ? Math.max(...ots.map(t => t.otNum || 0)) + 1 : 1;
-}
-function getCliente(id) { return clientes.find(c => c.id === id); }
-function getObra(clienteId, obraId) {
-  const c = getCliente(clienteId); if (!c) return null;
-  return (c.obras||[]).find(o => o.id === obraId);
-}
-function obraLabel(t) {
-  const c = getCliente(t.clienteId);
-  const o = c ? (c.obras||[]).find(ob => ob.id === t.obraId) : null;
-  const cn = c ? c.nombre : (t.clienteNombre || '—');
-  const on = o ? o.nombre : (t.obraNombre || '—');
-  return { cliente: cn, obra: on };
+// ════════════════════════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════════════════════════
+const fmt = d => { if(!d) return '—'; const[y,m,dd]=d.split('-'); return `${dd}/${m}/${y}`; };
+const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const hoy = () => new Date().toISOString().slice(0,10);
+const otLbl = n => 'OT-'+String(n).padStart(4,'0');
+
+function getCli(id){ return clientes.find(c=>c.id===id); }
+function getObra(cid,oid){ const c=getCli(cid); return c?(c.obras||[]).find(o=>o.id===oid):null; }
+function obraLabel(t){
+  const c=getCli(t.clienteId), o=c?(c.obras||[]).find(ob=>ob.id===t.obraId):null;
+  return { cli: c?c.nombre:(t.cliNombre||'—'), obra: o?o.nombre:(t.obraNombre||'—') };
 }
 
-// ── Render OTs ────────────────────────────────────────────
+// Item state machine
+function semaforo(t) {
+  const items = t.items||[];
+  if (!items.length) return 'pendiente';
+  const allDone = items.every(it => it.entregado >= it.solicitado);
+  if (allDone) return 'cerrada';
+  const hasProgress = items.some(it => it.terminado > 0 || it.entregado > 0);
+  return hasProgress ? 'parcial' : 'pendiente';
+}
+function semBadge(s) {
+  if (s==='cerrada') return `<span class="semaforo sem-green"><i class="ti ti-circle-check"></i> Cerrada</span>`;
+  if (s==='parcial') return `<span class="semaforo sem-yellow"><i class="ti ti-clock"></i> Parcial</span>`;
+  return `<span class="semaforo sem-red"><i class="ti ti-alert-circle"></i> Pendiente</span>`;
+}
+function progPct(t) {
+  const tot = (t.items||[]).reduce((s,it)=>s+it.solicitado,0);
+  const ent = (t.items||[]).reduce((s,it)=>s+it.entregado,0);
+  return tot>0 ? Math.round(ent/tot*100) : 0;
+}
+function progColor(pct) {
+  if (pct===100) return 'var(--green)';
+  if (pct>0) return 'var(--yellow)';
+  return 'var(--red)';
+}
+function nextCliId(){ return clientes.length ? Math.max(...clientes.map(c=>c.id))+1 : 1; }
+function nextObraId(c){ return (c.obras&&c.obras.length) ? Math.max(...c.obras.map(o=>o.id))+1 : 1; }
+function nextItemId(t){ return (t.items&&t.items.length) ? Math.max(...t.items.map(i=>i.id))+1 : 1; }
+
+// ════════════════════════════════════════════════════════
+// NAVIGATION
+// ════════════════════════════════════════════════════════
+function goPage(name) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.getElementById('tab-'+name).classList.add('active');
+  if (name==='clientes') renderClientes();
+  if (name==='materiales') renderMateriales();
+}
+
+// ════════════════════════════════════════════════════════
+// RENDER OTs
+// ════════════════════════════════════════════════════════
+let abiertos = {};
+
+function poblarFiltroObras() {
+  const sel = document.getElementById('filtro-obra');
+  const cur = sel.value;
+  const obras = new Map();
+  ots.forEach(t => {
+    const lb = obraLabel(t);
+    const key = lb.obra;
+    if (!obras.has(key)) obras.set(key, lb.obra);
+  });
+  sel.innerHTML = '<option value="">Todas las obras</option>';
+  obras.forEach((nombre) => {
+    const opt = document.createElement('option');
+    opt.value = nombre; opt.textContent = nombre;
+    if (nombre === cur) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+
 function renderOTs() {
-  const q = document.getElementById('buscar').value.toLowerCase();
-  const f = document.getElementById('filtroEstado').value;
+  poblarFiltroObras();
+  const q  = document.getElementById('buscar').value.toLowerCase();
+  const fo = document.getElementById('filtro-obra').value;
+  const fe = document.getElementById('filtro-estado').value;
+
   const lista = ots.filter(t => {
     const lb = obraLabel(t);
-    const mq = !q || (lb.cliente + lb.obra + (t.refObra||'') + otLabel(t.otNum||0)).toLowerCase().includes(q);
-    const cerrado = otCerrada(t);
-    const mf = !f || (f==='activo' && !cerrado) || (f==='cerrado' && cerrado);
-    return mq && mf;
+    const mq = !q || (lb.cli+lb.obra+(t.ref||'')+otLbl(t.otNum||0)).toLowerCase().includes(q);
+    const mo = !fo || lb.obra === fo;
+    const sem = semaforo(t);
+    const ms = !fe || sem === fe;
+    return mq && mo && ms;
   });
 
-  const cerrados = ots.filter(t => otCerrada(t)).length;
-  const activos = ots.length - cerrados;
-  const enFab = ots.filter(t => !otCerrada(t) && t.items.some(i => i.estado==='fabricacion')).length;
-  const conFalt = ots.filter(t => !otCerrada(t) && t.items.some(it => matFaltantes(it) > 0)).length;
-  const vencidos = ots.filter(t => {
-    if (!t.necesidad || otCerrada(t)) return false;
-    return new Date(t.necesidad+'T12:00:00') < new Date();
-  }).length;
+  // Stats
+  const total = ots.length;
+  const cerradas = ots.filter(t=>semaforo(t)==='cerrada').length;
+  const parciales = ots.filter(t=>semaforo(t)==='parcial').length;
+  const pendientes = ots.filter(t=>semaforo(t)==='pendiente').length;
+  // mat badge
+  const matPendientes = ots.reduce((s,t) => s + (t.items||[]).reduce((s2,it) =>
+    s2 + (it.materiales||[]).filter(m=>m.estado!=='recibido').length, 0), 0);
+  const mb = document.getElementById('mat-badge');
+  if (matPendientes>0){ mb.textContent=matPendientes; mb.style.display='inline'; }
+  else mb.style.display='none';
 
   document.getElementById('stats').innerHTML = `
-    <div class="stat"><div class="stat-label">Total OTs</div><div class="stat-val">${ots.length}</div></div>
-    <div class="stat"><div class="stat-label">Activas</div><div class="stat-val green">${activos}</div></div>
-    <div class="stat"><div class="stat-label">Fabricación</div><div class="stat-val warn">${enFab}</div></div>
-    <div class="stat"><div class="stat-label">Mat. faltantes</div><div class="stat-val danger">${conFalt}</div></div>
-    <div class="stat"><div class="stat-label">Cerradas</div><div class="stat-val">${cerrados}</div></div>
-    ${vencidos ? `<div class="stat"><div class="stat-label">Vencidas</div><div class="stat-val danger">${vencidos}</div></div>` : ''}
+    <div class="stat"><div class="stat-lbl">Total OTs</div><div class="stat-val">${total}</div></div>
+    <div class="stat"><div class="stat-lbl">Pendientes</div><div class="stat-val sv-red">${pendientes}</div></div>
+    <div class="stat"><div class="stat-lbl">Parciales</div><div class="stat-val sv-yellow">${parciales}</div></div>
+    <div class="stat"><div class="stat-lbl">Cerradas</div><div class="stat-val sv-green">${cerradas}</div></div>
+    <div class="stat"><div class="stat-lbl">Mat. pendientes</div><div class="stat-val sv-blue">${matPendientes}</div></div>
   `;
 
-  const cards = document.getElementById('cards');
-  if (!lista.length) {
-    cards.innerHTML = `<div class="empty"><i class="ti ti-clipboard-x"></i>No hay órdenes de trabajo${q||f?' con ese filtro':''}.</div>`;
-    return;
-  }
+  const el = document.getElementById('cards');
+  if (!lista.length) { el.innerHTML=`<div class="empty"><i class="ti ti-clipboard-x"></i>Sin órdenes de trabajo${q||fo||fe?' con ese filtro':''}.</div>`; return; }
 
-  const hoyD = new Date(); hoyD.setHours(0,0,0,0);
-  cards.innerHTML = lista.map(t => {
-    const cerrado = otCerrada(t);
-    const prog = progOT(t);
-    const nec = t.necesidad ? new Date(t.necesidad+'T12:00:00') : null;
-    const vence = nec && !cerrado && nec < hoyD;
-    const abierto = !!abiertos[t.id];
-    const estPpal = estadoPrincipal(t);
-    const totalFalt = t.items.reduce((s,it) => s + matFaltantes(it), 0);
-    const lb = obraLabel(t);
-
-    return `<div class="card${cerrado?' cerrado':''}" id="card-${t.id}">
-      <div class="card-header" onclick="toggle(${t.id})">
-        <div class="card-num-wrap">
-          <span class="ot-label">${otLabel(t.otNum||t.id)}</span>
-          ${t.refObra ? `<span class="obra-ref" title="${esc(t.refObra)}">${esc(t.refObra)}</span>` : ''}
+  el.innerHTML = lista.map(t => {
+    const sem = semaforo(t);
+    const pct = progPct(t);
+    const lb  = obraLabel(t);
+    const ab  = !!abiertos[t.id];
+    return `<div class="card" id="card-${t.id}">
+      <div class="card-hdr" onclick="toggleCard(${t.id})">
+        <div class="ot-col">
+          <span class="ot-num">${otLbl(t.otNum||t.id)}</span>
+          ${t.ref ? `<span class="ot-ref" title="${esc(t.ref)}">${esc(t.ref)}</span>` : ''}
         </div>
         <div class="card-info">
-          <div class="card-title">${esc(lb.cliente)} — <span style="font-weight:400;font-style:italic">${esc(lb.obra)}</span></div>
-          <div class="card-sub">Necesidad: ${fmt(t.necesidad)}${vence?' ⚠ VENCIDO':''} · ${t.items.length} ítem${t.items.length!==1?'s':''}</div>
-          <div class="prog-bar"><div class="prog-fill" style="width:${prog}%"></div></div>
+          <div class="card-title">${esc(lb.cli)} — <span style="font-weight:400;font-style:italic">${esc(lb.obra)}</span></div>
+          <div class="card-meta">${fmt(t.fecha)} · ${(t.items||[]).length} trabajo${(t.items||[]).length!==1?'s':''}</div>
+          <div class="prog-bar" style="max-width:180px"><div class="prog-fill" style="width:${pct}%;background:${progColor(pct)}"></div></div>
         </div>
-        <div class="card-badges">
-          ${cerrado ? '<span class="badge b-cerrado"><i class="ti ti-circle-check"></i> Cerrada</span>'
-            : `<span class="badge b-${estPpal}">${ESTADOS_ITEM[estPpal]}</span>`}
-          ${totalFalt>0 ? `<span class="badge" style="background:var(--danger-light);color:var(--danger)"><i class="ti ti-alert-triangle"></i> ${totalFalt} faltante${totalFalt!==1?'s':''}</span>` : ''}
-          ${vence ? '<span class="badge b-vence"><i class="ti ti-alert-triangle"></i> Vencida</span>' : ''}
-          <span style="font-size:12px;color:var(--text3);min-width:32px;text-align:right">${prog}%</span>
+        <div class="card-right">
+          ${semBadge(sem)}
+          <span style="font-size:11px;color:var(--text3)">${pct}%</span>
         </div>
-        <i class="ti ti-chevron-down chevron${abierto?' open':''}"></i>
+        <i class="ti ti-chevron-down chevron${ab?' open':''}"></i>
       </div>
-      ${abierto ? renderCardBody(t, vence, lb) : ''}
+      ${ab ? renderCardBody(t) : ''}
     </div>`;
   }).join('');
 }
 
-function renderCardBody(t, vence, lb) {
-  const cerrado = otCerrada(t);
+function renderCardBody(t) {
+  const sem = semaforo(t);
+  const lb  = obraLabel(t);
   return `<div class="card-body">
     <div class="meta-row">
-      <span><i class="ti ti-calendar-plus"></i> Pedido: ${fmt(t.pedido)}</span>
-      <span class="${vence?'vence':''}"><i class="ti ti-alarm"></i> Necesidad: ${fmt(t.necesidad)}${vence?' ⚠':''}</span>
-      ${t.refObra ? `<span><i class="ti ti-file-invoice"></i> Ref: <strong>${esc(t.refObra)}</strong></span>` : ''}
-      <span><i class="ti ti-package"></i> ${t.pedidoMat
-        ? '<span class="badge b-si" style="font-size:10px;padding:2px 7px"><i class="ti ti-check"></i> Mat. pedido</span>'
-        : '<span class="badge b-no" style="font-size:10px;padding:2px 7px"><i class="ti ti-x"></i> Mat. pendiente</span>'}</span>
+      <span><i class="ti ti-calendar"></i>${fmt(t.fecha)}</span>
+      <span><i class="ti ti-file-invoice"></i>Ref: <strong>${esc(t.ref)||'—'}</strong></span>
+      <span><i class="ti ti-user"></i>${esc(lb.cli)}</span>
+      <span><i class="ti ti-building-community"></i>${esc(lb.obra)}</span>
+      ${sem==='cerrada' ? '<span style="color:var(--green)"><i class="ti ti-circle-check"></i>OT Cerrada</span>' : ''}
     </div>
 
-    <div class="sect-title"><i class="ti ti-list-details"></i> Ítems de la OT</div>
-    <div class="items-wrap">
-    <table class="items-table">
+    <div class="sect"><i class="ti ti-list-details"></i> Trabajos</div>
+    <div class="tbl-wrap"><table class="tbl">
       <thead><tr>
-        <th>Descripción, materiales y entregas</th>
-        <th style="text-align:center">Pedido</th>
-        <th style="text-align:center">Entregado</th>
-        <th>Estado</th>
-        <th style="width:32px"></th>
+        <th>Descripción y materiales</th>
+        <th style="text-align:center;white-space:nowrap">Solicitado</th>
+        <th style="text-align:center;white-space:nowrap">Terminado<br><span style="font-weight:400;font-size:9px">(en taller)</span></th>
+        <th style="text-align:center;white-space:nowrap">Entregado</th>
+        <th style="min-width:140px">Acciones</th>
       </tr></thead>
       <tbody>
-        ${t.items.length ? t.items.map(it => {
-          const ent = entregadoItem(it);
-          const comp = itemCompleto(it);
-          const restante = it.total - ent;
-          const mats = it.materiales || [];
-          const falt = mats.filter(m => !m.llegado).length;
-          return `<tr class="${comp?'item-done':''}">
-            <td>
-              <div class="item-desc-name">
-                ${comp ? '<i class="ti ti-circle-check item-done-icon"></i>' : ''}
-                ${esc(it.desc)}
-                ${falt>0&&!comp ? `<span style="font-size:10px;font-weight:700;color:var(--danger);background:var(--danger-light);border-radius:3px;padding:1px 6px">${falt} mat. faltante${falt!==1?'s':''}</span>` : ''}
-              </div>
-              ${mats.length ? `
-                <div style="margin-top:6px">
-                  <div style="font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Materiales</div>
-                  <div class="mat-checklist">
-                    ${mats.map((m,mi) => `<div class="mat-check-row ${m.llegado?'llegado':'faltante'}">
-                      <input type="checkbox" ${m.llegado?'checked':''} onchange="toggleMat(${t.id},${it.id},${mi},this.checked)">
-                      <span class="mat-check-desc">${esc(m.desc)}</span>
-                      <span class="mat-check-cant">${esc(m.cant)}</span>
-                      <span class="${m.llegado?'mat-llegado-tag':'mat-faltante-tag'}">${m.llegado?'Llegó':'FALTANTE'}</span>
-                    </div>`).join('')}
-                  </div>
-                </div>` : ''}
-              <div class="entregas-list" style="margin-top:${mats.length?'10px':'4px'}">
-                ${(it.entregas||[]).map((e,ei) => `<div class="entrega-row">
-                  <span class="entrega-fecha"><i class="ti ti-truck" style="font-size:11px"></i> ${fmt(e.fecha)}</span>
-                  <span class="entrega-cant">+${e.cant}</span>
-                  <span class="entrega-nota">${esc(e.nota)}</span>
-                  <button class="entrega-del" onclick="quitarEntrega(${t.id},${it.id},${ei})"><i class="ti ti-x"></i></button>
-                </div>`).join('')}
-              </div>
-              ${!comp ? `<div class="add-entrega">
-                <input type="date" class="inp-fecha" id="ef-${t.id}-${it.id}" value="${hoyISO()}">
-                <input type="number" class="inp-cant" id="ec-${t.id}-${it.id}" placeholder="Cant." min="1" max="${restante}">
-                <input type="text" class="inp-nota" id="en-${t.id}-${it.id}" placeholder="Nota (quién recibió...)">
-                <button class="btn btn-xs btn-primary" onclick="registrarEntrega(${t.id},${it.id})"><i class="ti ti-plus"></i> Registrar</button>
+      ${(t.items||[]).map(it => {
+        const done = it.entregado >= it.solicitado;
+        const dispFab = it.terminado - it.entregado; // disponible para despachar (no puede ser negativo)
+        const realDisp = Math.max(0, dispFab);
+        const mats = it.materiales||[];
+        const falt = mats.filter(m=>m.estado==='pedir').length;
+        const esper = mats.filter(m=>m.estado==='pedido').length;
+        return `<tr class="${done?'done-row':''}">
+          <td>
+            <div class="item-name">${done?'<i class="ti ti-circle-check" style="color:var(--green);font-size:13px"></i> ':''} ${esc(it.desc)}
+              ${falt>0?`<span class="tag tag-pedir" style="margin-left:4px">${falt} mat. faltante${falt!==1?'s':''}</span>`:''}
+              ${esper>0?`<span class="tag tag-pedido">${esper} en espera</span>`:''}
+            </div>
+            ${mats.length ? `
+              <div class="mat-list">
+                ${mats.map((m,mi)=>{
+                  const pedida   = Number(m.cantPedida||0);
+                  const recibida = Number(m.cantRecibida||0);
+                  const faltante = Math.max(0, pedida - recibida);
+                  const hayFalt  = pedida > 0 && faltante > 0;
+                  return `<div class="mat-row st-${m.estado}" id="mr-${t.id}-${it.id}-${mi}">
+                    <span class="mat-desc">${esc(m.desc)}</span>
+                    <span class="mat-cant" style="color:var(--text3);font-size:11px">${esc(m.cant)}</span>
+                    <div class="mat-qty">
+                      <div class="mat-qty-block">
+                        <span class="mat-qty-lbl">Pedido</span>
+                        <input class="mat-qty-input" type="number" min="0" value="${pedida||''}" placeholder="0"
+                          title="Cantidad pedida al proveedor"
+                          onchange="actualizarCantMat(${t.id},${it.id},${mi},'cantPedida',this.value)">
+                      </div>
+                      <div class="mat-qty-block">
+                        <span class="mat-qty-lbl">Recibido</span>
+                        <input class="mat-qty-input" type="number" min="0" value="${recibida||''}" placeholder="0"
+                          title="Cantidad ya recibida en taller"
+                          onchange="actualizarCantMat(${t.id},${it.id},${mi},'cantRecibida',this.value)">
+                      </div>
+                      ${pedida>0 ? `<span class="mat-faltante${faltante===0?' ok':''}">
+                        ${faltante===0?'✓ Completo':`Falta: ${faltante}`}
+                      </span>` : ''}
+                    </div>
+                    <select class="mat-sel" onchange="cambiarEstadoMat(${t.id},${it.id},${mi},this.value)">
+                      <option value="pedir" ${m.estado==='pedir'?'selected':''}>🔴 Por Pedir</option>
+                      <option value="pedido" ${m.estado==='pedido'?'selected':''}>🟡 Pedido/En espera</option>
+                      <option value="recibido" ${m.estado==='recibido'?'selected':''}>🟢 Recibido</option>
+                    </select>
+                  </div>`;
+                }).join('')}
               </div>` : ''}
-            </td>
-            <td style="text-align:center;font-weight:700;font-size:15px">${it.total}</td>
-            <td style="text-align:center"><span class="prog-text${comp?' complete':''}">${ent}/${it.total}</span></td>
-            <td class="item-estado">
-              <select onchange="cambiarEstadoItem(${t.id},${it.id},this.value)" ${comp?'disabled':''}>
-                ${Object.entries(ESTADOS_ITEM).map(([k,v]) => `<option value="${k}"${it.estado===k?' selected':''}>${v}</option>`).join('')}
-              </select>
-            </td>
-            <td><button class="btn btn-icon btn-sm" onclick="quitarItem(${t.id},${it.id})" style="color:var(--danger)"><i class="ti ti-trash"></i></button></td>
-          </tr>`;
-        }).join('') : `<tr><td colspan="5" style="text-align:center;color:var(--text3);padding:16px;font-style:italic">Sin ítems — usá el formulario de abajo para agregar</td></tr>`}
+            <div class="qty-bar" style="margin-top:6px">
+              <span class="qty-pill qp-sol"><i class="ti ti-list" style="font-size:10px"></i> Sol: ${it.solicitado}</span>
+              <span class="qty-pill qp-term"><i class="ti ti-hammer" style="font-size:10px"></i> Term: ${it.terminado||0}</span>
+              <span class="qty-pill qp-ent"><i class="ti ti-truck" style="font-size:10px"></i> Ent: ${it.entregado||0}</span>
+              ${realDisp>0?`<span class="qty-pill" style="background:var(--blue-light);color:var(--blue);border:1px solid rgba(74,127,193,.3)">Disp: ${realDisp}</span>`:''}
+            </div>
+          </td>
+          <td style="text-align:center;font-weight:700;font-size:15px">${it.solicitado}</td>
+          <td style="text-align:center">
+            <span style="font-weight:700;font-size:14px;color:${it.terminado>0?'var(--blue)':'var(--text3)'}">${it.terminado||0}</span>
+          </td>
+          <td style="text-align:center">
+            <span style="font-weight:700;font-size:14px;color:${done?'var(--green)':it.entregado>0?'var(--yellow)':'var(--text3)'}">${it.entregado||0}</span>
+          </td>
+          <td>
+            <div class="item-actions">
+              ${!done?`<button class="btn btn-sm" style="color:var(--blue);border-color:rgba(74,127,193,.3)" onclick="abrirModalFab(${t.id},${it.id})"><i class="ti ti-hammer"></i> Fabricar</button>`:''}
+              ${!done && realDisp>0?`<button class="btn btn-sm btn-primary" onclick="abrirModalEnt(${t.id},${it.id})"><i class="ti ti-truck"></i> Entregar</button>`:''}
+              ${done?`<span style="font-size:11px;color:var(--green)"><i class="ti ti-circle-check"></i> Completado</span>`:''}
+            </div>
+          </td>
+        </tr>`;
+      }).join('')}
       </tbody>
-    </table>
-    </div>
+    </table></div>
 
-    <div class="add-from-card">
-      <div class="add-from-card-title">+ Agregar ítem a esta OT</div>
-      <div class="add-from-card-fields">
-        <input type="text" id="ni-desc-${t.id}" placeholder="Descripción del ítem" style="flex:2;min-width:140px">
-        <input type="number" id="ni-cant-${t.id}" placeholder="Cant." min="1" style="width:64px">
-        <select id="ni-est-${t.id}">
-          ${Object.entries(ESTADOS_ITEM).map(([k,v]) => `<option value="${k}">${v}</option>`).join('')}
-        </select>
-        <button class="btn btn-sm btn-primary" onclick="agregarItemCard(${t.id})"><i class="ti ti-plus"></i> Agregar ítem</button>
+    <!-- Agregar item desde card -->
+    <div class="add-card-block">
+      <div class="add-card-lbl">+ Agregar trabajo a esta OT</div>
+      <div class="add-card-fields">
+        <input id="nc-desc-${t.id}" placeholder="Descripción" style="flex:2;min-width:120px">
+        <input id="nc-cant-${t.id}" type="number" min="1" placeholder="Cant." style="width:60px">
+        <button class="btn btn-sm btn-primary" onclick="addItemCard(${t.id})"><i class="ti ti-plus"></i> Agregar</button>
       </div>
     </div>
 
+    <!-- Historial despachos -->
+    ${renderHistorial(t)}
+
     <div class="card-footer">
       <button class="btn btn-sm" onclick="abrirModalOT(${t.id})"><i class="ti ti-edit"></i> Editar datos</button>
+      ${sem==='cerrada' ? `<button class="btn btn-sm btn-warn" onclick="reabrirOT(${t.id})"><i class="ti ti-lock-open"></i> Reabrir</button>` : ''}
+      <button class="btn btn-sm" onclick="imprimirOT(${t.id})" style="color:var(--blue);border-color:rgba(74,127,193,.3)"><i class="ti ti-printer"></i> Imprimir OT</button>
       <button class="btn btn-sm btn-danger" onclick="eliminarOT(${t.id})" style="margin-left:auto"><i class="ti ti-trash"></i> Eliminar OT</button>
     </div>
   </div>`;
 }
 
-// ── Toggle card ───────────────────────────────────────────
-function toggle(id) { abiertos[id] = !abiertos[id]; renderOTs(); }
-
-// ── Materiales checklist ──────────────────────────────────
-function toggleMat(tid, iid, mi, checked) {
-  const t = ots.find(x => x.id === tid);
-  const it = t.items.find(x => x.id === iid);
-  it.materiales[mi].llegado = checked;
-  guardarOTs(); renderOTs();
+function renderHistorial(t) {
+  const hist = (t.historial||[]);
+  if (!hist.length) return '';
+  return `<div class="sect"><i class="ti ti-history"></i> Historial de despachos</div>
+    <div class="historial">
+      ${hist.slice().reverse().map(h => `<div class="hist-row">
+        <i class="ti ti-truck" style="font-size:13px"></i>
+        <span>Fecha: <strong>${fmt(h.fecha)}</strong></span>
+        <span>— Remito: <span class="hist-remito">${esc(h.remito)}</span></span>
+        <span>— Retiró: <strong>${esc(h.quien)}</strong></span>
+        <span>— Entregó: <strong>${h.cant}</strong> u. de <em>${esc(h.itemDesc)}</em></span>
+      </div>`).join('')}
+    </div>`;
 }
 
-// ── Entregas ──────────────────────────────────────────────
-function registrarEntrega(tid, iid) {
-  const t = ots.find(x => x.id === tid); if (!t) return;
-  const it = t.items.find(x => x.id === iid); if (!it) return;
-  const fecha = document.getElementById(`ef-${tid}-${iid}`).value;
-  const cant  = parseInt(document.getElementById(`ec-${tid}-${iid}`).value);
-  const nota  = document.getElementById(`en-${tid}-${iid}`).value.trim();
-  const restante = it.total - entregadoItem(it);
-  if (!fecha) { alert('Ingresá la fecha de entrega.'); return; }
-  if (!cant || cant < 1 || cant > restante) { alert(`Cantidad inválida. Máximo: ${restante}`); return; }
-  if (!it.entregas) it.entregas = [];
-  it.entregas.push({ fecha, cant, nota });
-  const abierto = abiertos[tid];
-  guardarOTs(); renderOTs();
-  if (abierto) abiertos[tid] = true;
-  if (otCerrada(t)) setTimeout(() => alert(`✅ ¡${otLabel(t.otNum||t.id)} completada! Todos los ítems entregados.`), 100);
+function toggleCard(id) { abiertos[id]=!abiertos[id]; renderOTs(); }
+
+// ════════════════════════════════════════════════════════
+// MATERIALES (estado por ítem)
+// ════════════════════════════════════════════════════════
+function cambiarEstadoMat(tid, iid, mi, val) {
+  const t = ots.find(x=>x.id===tid);
+  const it = t.items.find(x=>x.id===iid);
+  it.materiales[mi].estado = val;
+  save(); renderOTs();
+  if (document.getElementById('page-materiales').classList.contains('active')) renderMateriales();
 }
 
-function quitarEntrega(tid, iid, ei) {
-  if (!confirm('¿Quitar esta entrega?')) return;
-  const t = ots.find(x => x.id === tid);
-  const it = t.items.find(x => x.id === iid);
-  it.entregas.splice(ei, 1);
-  guardarOTs(); renderOTs();
+function actualizarCantMat(tid, iid, mi, campo, valor) {
+  const t  = ots.find(x=>x.id===tid);
+  const it = t.items.find(x=>x.id===iid);
+  it.materiales[mi][campo] = Number(valor)||0;
+  // Auto-estado: si recibido >= pedido y pedido>0 → recibido; si pedido>0 → pedido
+  const m = it.materiales[mi];
+  const ped = Number(m.cantPedida||0);
+  const rec = Number(m.cantRecibida||0);
+  if (ped > 0 && rec >= ped) m.estado = 'recibido';
+  else if (ped > 0 && rec > 0) m.estado = 'pedido';
+  save(); renderOTs();
+  if (document.getElementById('page-materiales').classList.contains('active')) renderMateriales();
 }
 
-// ── Items ─────────────────────────────────────────────────
-function cambiarEstadoItem(tid, iid, val) {
-  const t = ots.find(x => x.id === tid);
-  const it = t.items.find(x => x.id === iid);
-  it.estado = val; guardarOTs(); renderOTs();
-}
-function agregarItemCard(tid) {
-  const t = ots.find(x => x.id === tid); if (!t) return;
-  const desc = document.getElementById(`ni-desc-${tid}`).value.trim();
-  const cant = parseInt(document.getElementById(`ni-cant-${tid}`).value);
-  const est  = document.getElementById(`ni-est-${tid}`).value;
-  if (!desc || !cant || cant < 1) { alert('Completá descripción y cantidad.'); return; }
-  const nextIid = t.items.length ? Math.max(...t.items.map(i => i.id)) + 1 : 1;
-  t.items.push({ id: nextIid, desc, total: cant, estado: est, entregas: [], materiales: [] });
-  guardarOTs(); renderOTs();
-}
-function quitarItem(tid, iid) {
-  if (!confirm('¿Quitar este ítem?')) return;
-  const t = ots.find(x => x.id === tid);
-  t.items = t.items.filter(i => i.id !== iid);
-  guardarOTs(); renderOTs();
-}
-function eliminarOT(id) {
-  if (!confirm('¿Eliminar esta OT completa?')) return;
-  ots = ots.filter(t => t.id !== id);
-  delete abiertos[id];
-  guardarOTs(); renderOTs();
+// ════════════════════════════════════════════════════════
+// IMPRESIÓN DE OT
+// ════════════════════════════════════════════════════════
+function imprimirOT(id) {
+  // Marcar todas las cards como no-print excepto la seleccionada
+  document.querySelectorAll('.card').forEach(el => {
+    if (el.id === `card-${id}`) {
+      el.classList.remove('no-print');
+      // Asegurar que la card esté abierta
+      if (!abiertos[id]) { abiertos[id]=true; renderOTs(); }
+    } else {
+      el.classList.add('no-print');
+    }
+  });
+  // Pequeño delay para asegurar que el render terminó
+  setTimeout(() => {
+    window.print();
+    // Restaurar después de imprimir
+    setTimeout(() => {
+      document.querySelectorAll('.card').forEach(el => el.classList.remove('no-print'));
+    }, 500);
+  }, 150);
 }
 
-// ── Modal OT ──────────────────────────────────────────────
-function poblarSelectClientes(selectedId) {
-  const sel = document.getElementById('m-cliente');
-  sel.innerHTML = '<option value="">— Seleccionar cliente —</option>';
+function renderMateriales() {
+  const q  = document.getElementById('buscar-mat').value.toLowerCase();
+  const fe = document.getElementById('filtro-mat-estado').value;
+
+  let rows = [];
+  ots.forEach(t => {
+    if (semaforo(t)==='cerrada') return;
+    const lb = obraLabel(t);
+    (t.items||[]).forEach(it => {
+      (it.materiales||[]).forEach((m,mi) => {
+        if (m.estado==='recibido') return;
+        if (fe==='pedir' && m.estado!=='pedir') return;
+        if (fe==='pedido' && m.estado!=='pedido') return;
+        if (q && !(m.desc.toLowerCase().includes(q) || lb.cli.toLowerCase().includes(q) || lb.obra.toLowerCase().includes(q))) return;
+        rows.push({ t, it, m, mi, lb });
+      });
+    });
+  });
+
+  const nPedir  = rows.filter(r=>r.m.estado==='pedir').length;
+  const nPedido = rows.filter(r=>r.m.estado==='pedido').length;
+  document.getElementById('stats-mat').innerHTML = `
+    <div class="stat"><div class="stat-lbl">Por Pedir</div><div class="stat-val sv-red">${nPedir}</div></div>
+    <div class="stat"><div class="stat-lbl">Pedido / En espera</div><div class="stat-val sv-yellow">${nPedido}</div></div>
+    <div class="stat"><div class="stat-lbl">Total pendientes</div><div class="stat-val">${rows.length}</div></div>
+  `;
+
+  const el = document.getElementById('mat-global-list');
+  if (!rows.length) { el.innerHTML=`<div class="empty"><i class="ti ti-mood-happy"></i>¡Sin materiales pendientes!</div>`; return; }
+
+  el.innerHTML = rows.map(({t,it,m,mi,lb}) => {
+    const pedida   = Number(m.cantPedida||0);
+    const recibida = Number(m.cantRecibida||0);
+    const faltante = pedida > 0 ? Math.max(0, pedida - recibida) : null;
+    return `
+    <div class="mat-global-row st-${m.estado}">
+      <div class="mg-info">
+        <div class="mg-desc">${esc(m.desc)} ${m.cant?`<span style="font-size:11px;color:var(--text3)">— ${esc(m.cant)}</span>`:''}
+          <span class="tag tag-${m.estado==='pedir'?'pedir':'pedido'}" style="margin-left:6px">${m.estado==='pedir'?'🔴 Por Pedir':'🟡 Pedido/En espera'}</span>
+        </div>
+        <div class="mg-meta">${otLbl(t.otNum||t.id)} · ${esc(lb.cli)} — ${esc(lb.obra)} · Trabajo: <strong>${esc(it.desc)}</strong></div>
+        <div style="display:flex;gap:10px;margin-top:6px;align-items:center;flex-wrap:wrap">
+          <div class="mat-qty-block">
+            <span class="mat-qty-lbl">Cant. pedida</span>
+            <input class="mat-qty-input" type="number" min="0" value="${pedida||''}" placeholder="0"
+              onchange="actualizarCantMat(${t.id},${it.id},${mi},'cantPedida',this.value)">
+          </div>
+          <div class="mat-qty-block">
+            <span class="mat-qty-lbl">Cant. recibida</span>
+            <input class="mat-qty-input" type="number" min="0" value="${recibida||''}" placeholder="0"
+              onchange="actualizarCantMat(${t.id},${it.id},${mi},'cantRecibida',this.value)">
+          </div>
+          ${faltante !== null ? `<span class="mat-faltante${faltante===0?' ok':''}" style="margin-top:12px">
+            ${faltante===0?'✓ Completo':`Falta: ${faltante}`}
+          </span>` : ''}
+        </div>
+      </div>
+      <select class="mat-sel" onchange="cambiarEstadoMat(${t.id},${it.id},${mi},this.value)">
+        <option value="pedir" ${m.estado==='pedir'?'selected':''}>🔴 Por Pedir</option>
+        <option value="pedido" ${m.estado==='pedido'?'selected':''}>🟡 Pedido/En espera</option>
+        <option value="recibido" ${m.estado==='recibido'?'selected':''}>🟢 Recibido</option>
+      </select>
+    </div>
+  `}).join('');
+}
+
+// ════════════════════════════════════════════════════════
+// MODAL OT
+// ════════════════════════════════════════════════════════
+function poblarCliSelect(selId) {
+  const el = document.getElementById('m-cliente');
+  el.innerHTML = '<option value="">— Seleccionar —</option>';
   clientes.forEach(c => {
-    const opt = document.createElement('option');
-    opt.value = c.id; opt.textContent = c.nombre;
-    if (c.id === selectedId) opt.selected = true;
-    sel.appendChild(opt);
+    const o = document.createElement('option');
+    o.value=c.id; o.textContent=c.nombre;
+    if(c.id===selId) o.selected=true;
+    el.appendChild(o);
   });
 }
-
-function poblarSelectObras(clienteId, selectedObraId) {
-  const sel = document.getElementById('m-obra');
-  sel.innerHTML = '<option value="">— Seleccionar obra —</option>';
-  const c = getCliente(clienteId);
+function poblarObraSelect(cid, selObraId) {
+  const el = document.getElementById('m-obra');
+  const c  = getCli(cid);
+  el.innerHTML = '<option value="">— Seleccionar —</option>';
   if (c && c.obras && c.obras.length) {
     c.obras.forEach(o => {
-      const opt = document.createElement('option');
-      opt.value = o.id; opt.textContent = o.nombre;
-      if (o.id === selectedObraId) opt.selected = true;
-      sel.appendChild(opt);
+      const opt=document.createElement('option');
+      opt.value=o.id; opt.textContent=o.nombre;
+      if(o.id===selObraId) opt.selected=true;
+      el.appendChild(opt);
     });
-    sel.disabled = false;
+    el.disabled=false;
   } else {
-    sel.innerHTML = '<option value="">— Sin obras cargadas —</option>';
-    sel.disabled = true;
+    el.innerHTML='<option value="">— Sin obras —</option>';
+    el.disabled=true;
   }
 }
-
 function onClienteChange() {
-  const cid = parseInt(document.getElementById('m-cliente').value) || null;
-  poblarSelectObras(cid, null);
+  const cid=parseInt(document.getElementById('m-cliente').value)||null;
+  poblarObraSelect(cid,null);
 }
 
 function abrirModalOT(id) {
-  editandoOTId = id || null;
-  modalItemsTemp = [];
-  modalMatTemp = [];
-
-  const t = id ? ots.find(x => x.id === id)
-    : { id:null, clienteId:null, obraId:null, pedido:'', necesidad:'', refObra:'', pedidoMat:false, items:[] };
-
-  document.getElementById('modal-ot-title').innerHTML = id
-    ? `<i class="ti ti-edit"></i> Editar ${otLabel(t.otNum||t.id)}`
+  editOTId=id||null; modItems=[]; modMats=[];
+  const t=id?ots.find(x=>x.id===id):{};
+  document.getElementById('mot-title').innerHTML = id
+    ? `<i class="ti ti-edit"></i> Editar ${otLbl(t.otNum||t.id)}`
     : `<i class="ti ti-clipboard-list"></i> Nueva Orden de Trabajo`;
-  document.getElementById('modal-ot-subtitle').textContent = id
-    ? 'Modificá los datos generales. Los ítems se editan desde la tarjeta.'
-    : 'Completá los datos y agregá los ítems antes de guardar.';
+  document.getElementById('mot-sub').textContent = id
+    ? 'Editá los datos generales. Los trabajos se gestionan desde la tarjeta.'
+    : 'Completá los datos y agregá los trabajos antes de guardar.';
 
-  poblarSelectClientes(t.clienteId);
-  poblarSelectObras(t.clienteId, t.obraId);
+  poblarCliSelect(t.clienteId||null);
+  poblarObraSelect(t.clienteId||null, t.obraId||null);
+  document.getElementById('m-ref').value   = t.ref||'';
+  document.getElementById('m-fecha').value = t.fecha||hoy();
 
-  document.getElementById('m-pedido').value    = t.pedido || '';
-  document.getElementById('m-necesidad').value = t.necesidad || '';
-  document.getElementById('m-refobra').value   = t.refObra || '';
-  document.getElementById('m-pedidoMat').value = t.pedidoMat ? '1' : '0';
-
-  const addBlock = document.getElementById('add-item-block');
-  const preview  = document.getElementById('ot-items-preview');
+  const ab = document.getElementById('add-block');
+  const pr = document.getElementById('ot-preview');
   if (id) {
-    addBlock.style.display = 'none';
-    preview.innerHTML = `<div class="no-items-msg"><i class="ti ti-info-circle"></i> En modo edición, los ítems se modifican desde la tarjeta de la OT.</div>`;
-    document.getElementById('items-count-badge').textContent = '';
+    ab.style.display='none';
+    pr.innerHTML=`<div class="no-items" style="background:var(--blue-light);color:var(--blue)"><i class="ti ti-info-circle"></i> En modo edición, los trabajos se gestionan desde la tarjeta.</div>`;
+    document.getElementById('items-badge').textContent='';
   } else {
-    addBlock.style.display = 'block';
-    renderModalItemsPreview();
-    renderTempMatList();
+    ab.style.display='block';
+    renderPreview(); renderTmpMats();
   }
-
   document.getElementById('modal-ot').classList.add('open');
 }
-
-function cerrarModalOT() {
-  document.getElementById('modal-ot').classList.remove('open');
-  modalItemsTemp = []; modalMatTemp = [];
-}
-document.getElementById('modal-ot').addEventListener('click', e => {
-  if (e.target === document.getElementById('modal-ot')) cerrarModalOT();
-});
+function cerrarModalOT() { document.getElementById('modal-ot').classList.remove('open'); modItems=[]; modMats=[]; }
+document.getElementById('modal-ot').addEventListener('click',e=>{ if(e.target===document.getElementById('modal-ot')) cerrarModalOT(); });
 
 function guardarModalOT() {
-  const clienteId = parseInt(document.getElementById('m-cliente').value) || null;
-  const obraId    = parseInt(document.getElementById('m-obra').value) || null;
-  if (!clienteId) { alert('Seleccioná un cliente.'); return; }
-  if (!obraId)    { alert('Seleccioná una obra.'); return; }
+  const cid  = parseInt(document.getElementById('m-cliente').value)||null;
+  const oid  = parseInt(document.getElementById('m-obra').value)||null;
+  const ref  = document.getElementById('m-ref').value.trim();
+  const fecha= document.getElementById('m-fecha').value;
+  if (!cid) { alert('Seleccioná un cliente.'); return; }
+  if (!oid) { alert('Seleccioná una obra.'); return; }
 
-  // Guardamos también nombres como fallback
-  const c = getCliente(clienteId);
-  const o = getObra(clienteId, obraId);
-
-  if (editandoOTId) {
-    const t = ots.find(x => x.id === editandoOTId);
-    t.clienteId    = clienteId;
-    t.obraId       = obraId;
-    t.clienteNombre = c ? c.nombre : '';
-    t.obraNombre    = o ? o.nombre : '';
-    t.pedido       = document.getElementById('m-pedido').value;
-    t.necesidad    = document.getElementById('m-necesidad').value;
-    t.refObra      = document.getElementById('m-refobra').value.trim();
-    t.pedidoMat    = document.getElementById('m-pedidoMat').value === '1';
+  const c=getCli(cid), o=getObra(cid,oid);
+  if (editOTId) {
+    const t=ots.find(x=>x.id===editOTId);
+    t.clienteId=cid; t.obraId=oid;
+    t.cliNombre=c?c.nombre:''; t.obraNombre=o?o.nombre:'';
+    t.ref=ref; t.fecha=fecha;
   } else {
     const nuevo = {
-      id: nextOTId++, otNum: nextOTNum++,
-      clienteId, obraId,
-      clienteNombre: c ? c.nombre : '',
-      obraNombre:    o ? o.nombre : '',
-      pedido:     document.getElementById('m-pedido').value,
-      necesidad:  document.getElementById('m-necesidad').value,
-      refObra:    document.getElementById('m-refobra').value.trim(),
-      pedidoMat:  document.getElementById('m-pedidoMat').value === '1',
-      items: [...modalItemsTemp]
+      id:nextOTId++, otNum:nextOTNum++,
+      clienteId:cid, obraId:oid,
+      cliNombre:c?c.nombre:'', obraNombre:o?o.nombre:'',
+      ref, fecha,
+      items: modItems.map(it=>({...it})),
+      historial:[]
     };
     ots.push(nuevo);
-    abiertos[nuevo.id] = true;
+    abiertos[nuevo.id]=true;
   }
-  guardarOTs(); cerrarModalOT(); renderOTs();
+  save(); cerrarModalOT(); renderOTs();
 }
 
-// ── Modal items temp ──────────────────────────────────────
-function renderModalItemsPreview() {
-  const el = document.getElementById('ot-items-preview');
-  const badge = document.getElementById('items-count-badge');
-  badge.textContent = modalItemsTemp.length > 0
-    ? `${modalItemsTemp.length} agregado${modalItemsTemp.length!==1?'s':''}` : '';
-  if (!modalItemsTemp.length) {
-    el.innerHTML = `<div class="no-items-msg"><i class="ti ti-info-circle"></i> Todavía no hay ítems. Usá el formulario de abajo y hacé clic en "Agregar trabajo a la OT".</div>`;
-    return;
-  }
-  el.innerHTML = modalItemsTemp.map((it, i) => `
-    <div class="ot-item-preview-row">
-      <div class="ot-item-preview-info">
-        <div class="ot-item-preview-name"><i class="ti ti-point" style="color:var(--accent);font-size:12px"></i> ${esc(it.desc)}</div>
-        <div class="ot-item-preview-sub">Cantidad: <strong>${it.total}</strong> · ${ESTADOS_ITEM[it.estado]}</div>
-        ${it.materiales && it.materiales.length ? `<div class="ot-item-preview-mats">
-          ${it.materiales.map(m => `<div class="ot-item-preview-mat"><i class="ti ti-package"></i>${esc(m.desc)}${m.cant?' — '+esc(m.cant):''}</div>`).join('')}
-        </div>` : ''}
+// Preview items in modal
+function renderPreview() {
+  const pr=document.getElementById('ot-preview');
+  const bd=document.getElementById('items-badge');
+  bd.textContent=modItems.length?`${modItems.length} trabajo${modItems.length!==1?'s':''}` : '';
+  if (!modItems.length) { pr.innerHTML=`<div class="no-items"><i class="ti ti-info-circle"></i> Agregá trabajos usando el formulario de abajo.</div>`; return; }
+  pr.innerHTML=modItems.map((it,i)=>`
+    <div class="ot-prev-row">
+      <div class="ot-prev-info">
+        <div class="ot-prev-name"><i class="ti ti-point" style="color:var(--accent);font-size:11px"></i> ${esc(it.desc)}</div>
+        <div class="ot-prev-sub">Cantidad: <strong>${it.solicitado}</strong></div>
+        ${it.materiales&&it.materiales.length?`<div class="ot-prev-mats">
+          ${it.materiales.map(m=>`<div class="ot-prev-mat"><i class="ti ti-package"></i>${esc(m.desc)}${m.cant?' — '+esc(m.cant):''}</div>`).join('')}
+        </div>`:''}
       </div>
-      <button class="ot-item-del" onclick="quitarItemTemp(${i})"><i class="ti ti-x"></i></button>
+      <button class="ot-prev-del" onclick="quitarItemTemp(${i})"><i class="ti ti-x"></i></button>
     </div>`).join('');
 }
-function renderTempMatList() {
-  const el = document.getElementById('temp-mat-list'); if (!el) return;
-  el.innerHTML = modalMatTemp.map((m,i) => `
-    <div class="temp-mat-row">
-      <i class="ti ti-box" style="font-size:12px;color:var(--text3)"></i>
-      <span>${esc(m.desc)}${m.cant?' — <strong>'+esc(m.cant)+'</strong>':''}</span>
-      <button class="temp-mat-del" onclick="quitarMatTemp(${i})"><i class="ti ti-x"></i></button>
-    </div>`).join('');
+function renderTmpMats() {
+  const el=document.getElementById('tmp-mat-list'); if(!el) return;
+  el.innerHTML=modMats.map((m,i)=>`<div class="tmp-mat-row">
+    <i class="ti ti-box" style="font-size:11px;color:var(--text3)"></i>
+    <span>${esc(m.desc)}${m.cant?' — <strong>'+esc(m.cant)+'</strong>':''}</span>
+    <button class="tmp-mat-del" onclick="quitarMatTemp(${i})"><i class="ti ti-x"></i></button>
+  </div>`).join('');
 }
 function addMatTemp() {
-  const desc = document.getElementById('ni-mat-desc').value.trim();
-  const cant = document.getElementById('ni-mat-cant').value.trim();
-  if (!desc) { alert('Ingresá la descripción del material.'); return; }
-  modalMatTemp.push({ desc, cant, llegado: false });
-  document.getElementById('ni-mat-desc').value = '';
-  document.getElementById('ni-mat-cant').value = '';
-  renderTempMatList();
+  const d=document.getElementById('ni-mat-d').value.trim();
+  const c=document.getElementById('ni-mat-c').value.trim();
+  if(!d){alert('Ingresá el material.');return;}
+  modMats.push({desc:d,cant:c,estado:'pedir'});
+  document.getElementById('ni-mat-d').value='';
+  document.getElementById('ni-mat-c').value='';
+  renderTmpMats();
 }
-function quitarMatTemp(i) { modalMatTemp.splice(i,1); renderTempMatList(); }
-function quitarItemTemp(i) { modalItemsTemp.splice(i,1); renderModalItemsPreview(); }
-
-function agregarItemAOT() {
-  const desc = document.getElementById('ni-desc').value.trim();
-  const cant = parseInt(document.getElementById('ni-cant').value);
-  const est  = document.getElementById('ni-est').value;
-  if (!desc) { alert('Ingresá la descripción del ítem.'); return; }
-  if (!cant || cant < 1) { alert('Ingresá una cantidad válida.'); return; }
-  const nextIid = modalItemsTemp.length ? Math.max(...modalItemsTemp.map(i => i.id)) + 1 : 1;
-  modalItemsTemp.push({ id: nextIid, desc, total: cant, estado: est, entregas: [], materiales: [...modalMatTemp] });
-  document.getElementById('ni-desc').value = '';
-  document.getElementById('ni-cant').value = '';
-  document.getElementById('ni-est').value  = 'espera';
-  document.getElementById('ni-mat-desc').value = '';
-  document.getElementById('ni-mat-cant').value = '';
-  modalMatTemp = [];
-  renderTempMatList();
-  renderModalItemsPreview();
-  document.getElementById('ot-items-preview').scrollIntoView({ behavior:'smooth', block:'nearest' });
+function quitarMatTemp(i){modMats.splice(i,1);renderTmpMats();}
+function quitarItemTemp(i){modItems.splice(i,1);renderPreview();}
+function agregarItemOT() {
+  const desc=document.getElementById('ni-desc').value.trim();
+  const cant=parseInt(document.getElementById('ni-cant').value);
+  if(!desc){alert('Ingresá la descripción.');return;}
+  if(!cant||cant<1){alert('Ingresá una cantidad válida.');return;}
+  const nid=modItems.length?Math.max(...modItems.map(i=>i.id||0))+1:1;
+  modItems.push({id:nid,desc,solicitado:cant,terminado:0,entregado:0,materiales:[...modMats]});
+  document.getElementById('ni-desc').value='';
+  document.getElementById('ni-cant').value='';
+  document.getElementById('ni-mat-d').value='';
+  document.getElementById('ni-mat-c').value='';
+  modMats=[];
+  renderTmpMats(); renderPreview();
+  document.getElementById('ot-preview').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-// ── Clientes & Obras ──────────────────────────────────────
-function nextClienteId() {
-  return clientes.length ? Math.max(...clientes.map(c => c.id)) + 1 : 1;
-}
-function nextObraId(c) {
-  return (c.obras && c.obras.length) ? Math.max(...c.obras.map(o => o.id)) + 1 : 1;
+// Add item from card
+function addItemCard(tid) {
+  const t=ots.find(x=>x.id===tid); if(!t) return;
+  const desc=document.getElementById(`nc-desc-${tid}`).value.trim();
+  const cant=parseInt(document.getElementById(`nc-cant-${tid}`).value);
+  if(!desc||!cant||cant<1){alert('Completá descripción y cantidad.');return;}
+  t.items.push({id:nextItemId(t),desc,solicitado:cant,terminado:0,entregado:0,materiales:[],});
+  save(); renderOTs();
 }
 
+function eliminarOT(id) {
+  if(!confirm('¿Eliminar esta OT completa?')) return;
+  ots=ots.filter(t=>t.id!==id); delete abiertos[id];
+  save(); renderOTs();
+}
+function reabrirOT(id) {
+  // Reabrir: no cambia datos, solo el semáforo queda abierto porque entregado < solicitado
+  // En este caso, el usuario necesita editar cantidades manualmente.
+  // Simplemente informamos y mostramos botón editar.
+  alert('Para reabrir la OT, editá los trabajos reduciendo las cantidades entregadas si hubo un error, o agregá nuevos ítems.');
+}
+
+// ════════════════════════════════════════════════════════
+// MODAL FABRICACIÓN
+// ════════════════════════════════════════════════════════
+function abrirModalFab(tid, iid) {
+  const t=ots.find(x=>x.id===tid);
+  const it=t.items.find(x=>x.id===iid);
+  fabCtx={otId:tid, itemId:iid};
+  const restante=it.solicitado - it.terminado;
+  document.getElementById('fab-sub').textContent=`Trabajo: "${it.desc}"`;
+  document.getElementById('fab-info').innerHTML=`
+    Solicitado: <strong>${it.solicitado}</strong> · 
+    Ya terminado: <strong>${it.terminado}</strong> · 
+    Restante a fabricar: <strong style="color:var(--blue)">${Math.max(0,restante)}</strong>`;
+  document.getElementById('fab-cant').value='';
+  document.getElementById('fab-nota').value='';
+  document.getElementById('modal-fab').classList.add('open');
+}
+function cerrarModalFab(){document.getElementById('modal-fab').classList.remove('open');fabCtx=null;}
+document.getElementById('modal-fab').addEventListener('click',e=>{if(e.target===document.getElementById('modal-fab'))cerrarModalFab();});
+function guardarFab() {
+  if(!fabCtx) return;
+  const t=ots.find(x=>x.id===fabCtx.otId);
+  const it=t.items.find(x=>x.id===fabCtx.itemId);
+  const cant=parseInt(document.getElementById('fab-cant').value);
+  const restante=it.solicitado - it.terminado;
+  if(!cant||cant<1){alert('Ingresá una cantidad válida.');return;}
+  if(cant>restante){alert(`No podés agregar más de ${Math.max(0,restante)} unidades.`);return;}
+  it.terminado=(it.terminado||0)+cant;
+  save(); cerrarModalFab(); renderOTs();
+}
+
+// ════════════════════════════════════════════════════════
+// MODAL ENTREGA
+// ════════════════════════════════════════════════════════
+function abrirModalEnt(tid, iid) {
+  const t=ots.find(x=>x.id===tid);
+  const it=t.items.find(x=>x.id===iid);
+  entCtx={otId:tid, itemId:iid};
+  const disp=Math.max(0, it.terminado - it.entregado);
+  document.getElementById('ent-sub').textContent=`Trabajo: "${it.desc}"`;
+  document.getElementById('ent-info').innerHTML=`
+    Terminado (en taller): <strong>${it.terminado}</strong> · 
+    Ya entregado: <strong>${it.entregado}</strong> · 
+    Disponible para despacho: <strong style="color:var(--green)">${disp}</strong>`;
+  document.getElementById('ent-remito').value='';
+  document.getElementById('ent-fecha').value=hoy();
+  document.getElementById('ent-quien').value='';
+  document.getElementById('ent-cant').value='';
+  document.getElementById('modal-ent').classList.add('open');
+}
+function cerrarModalEnt(){document.getElementById('modal-ent').classList.remove('open');entCtx=null;}
+document.getElementById('modal-ent').addEventListener('click',e=>{if(e.target===document.getElementById('modal-ent'))cerrarModalEnt();});
+function guardarEnt() {
+  if(!entCtx) return;
+  const t=ots.find(x=>x.id===entCtx.otId);
+  const it=t.items.find(x=>x.id===entCtx.itemId);
+  const remito=document.getElementById('ent-remito').value.trim();
+  const fecha =document.getElementById('ent-fecha').value;
+  const quien =document.getElementById('ent-quien').value.trim();
+  const cant  =parseInt(document.getElementById('ent-cant').value);
+  const disp  =Math.max(0, it.terminado - it.entregado);
+  if(!remito){alert('Ingresá el N° de Remito de Salida.');return;}
+  if(!fecha){alert('Ingresá la fecha.');return;}
+  if(!quien){alert('Ingresá el nombre de quién retira.');return;}
+  if(!cant||cant<1){alert('Ingresá una cantidad válida.');return;}
+  if(cant>disp){alert(`Cantidad mayor a lo disponible (${disp} u.).`);return;}
+  it.entregado=(it.entregado||0)+cant;
+  if(!t.historial) t.historial=[];
+  t.historial.push({fecha,remito,quien,cant,itemDesc:it.desc});
+  save(); cerrarModalEnt(); renderOTs();
+  if(semaforo(t)==='cerrada') setTimeout(()=>alert(`✅ ¡${otLbl(t.otNum||t.id)} cerrada! Todos los trabajos entregados.`),100);
+}
+
+// ════════════════════════════════════════════════════════
+// CLIENTES & OBRAS
+// ════════════════════════════════════════════════════════
 function renderClientes() {
-  const list = document.getElementById('cliente-list');
-  document.getElementById('clientes-count').textContent = `${clientes.length} cliente${clientes.length!==1?'s':''}`;
-
-  if (!clientes.length) {
-    list.innerHTML = `<div class="empty-state">No hay clientes. Agregá uno abajo.</div>`;
-    renderObras();
-    return;
-  }
-  list.innerHTML = clientes.map(c => {
-    const obraCount = (c.obras||[]).length;
-    const sel = c.id === selectedClienteId;
-    return `<div class="cliente-row${sel?' selected':''}" onclick="selectCliente(${c.id})">
-      <i class="ti ti-building" style="color:${sel?'var(--accent)':'var(--text3)'};font-size:16px;flex-shrink:0"></i>
-      <span class="cliente-row-name">${esc(c.nombre)}</span>
-      <span class="cliente-row-count">${obraCount} obra${obraCount!==1?'s':''}</span>
-      <div class="cliente-row-actions">
-        <button class="btn btn-icon btn-sm" onclick="event.stopPropagation();editarNombre('cliente',${c.id})" title="Renombrar"><i class="ti ti-edit"></i></button>
-        <button class="btn btn-icon btn-sm" onclick="event.stopPropagation();eliminarCliente(${c.id})" title="Eliminar" style="color:var(--danger)"><i class="ti ti-trash"></i></button>
+  document.getElementById('cli-count').textContent=`${clientes.length} cliente${clientes.length!==1?'s':''}`;
+  const el=document.getElementById('cli-list');
+  if(!clientes.length){el.innerHTML=`<div class="empty-s">Sin clientes. Agregá uno abajo.</div>`;renderObras();return;}
+  el.innerHTML=clientes.map(c=>{
+    const oc=(c.obras||[]).length;
+    const sel=c.id===selCliId;
+    return `<div class="cli-row${sel?' sel':''}" onclick="selectCli(${c.id})">
+      <i class="ti ti-building" style="color:${sel?'var(--accent)':'var(--text3)'};font-size:15px;flex-shrink:0"></i>
+      <span class="cli-name">${esc(c.nombre)}</span>
+      <span class="cli-count">${oc} obra${oc!==1?'s':''}</span>
+      <div class="cli-acts">
+        <button class="btn btn-icon btn-sm" onclick="event.stopPropagation();editarNombre('cli',${c.id})" title="Renombrar"><i class="ti ti-edit"></i></button>
+        <button class="btn btn-icon btn-sm btn-danger" onclick="event.stopPropagation();eliminarCli(${c.id})" title="Eliminar"><i class="ti ti-trash"></i></button>
       </div>
     </div>`;
   }).join('');
   renderObras();
 }
-
-function selectCliente(id) {
-  selectedClienteId = id;
-  renderClientes();
+function selectCli(id){selCliId=id;renderClientes();}
+function addCliente(){
+  const inp=document.getElementById('new-cli-input');
+  const nombre=inp.value.trim();
+  if(!nombre){inp.focus();return;}
+  if(clientes.find(c=>c.nombre.toLowerCase()===nombre.toLowerCase())){alert('Ya existe.');return;}
+  clientes.push({id:nextCliId(),nombre,obras:[]});
+  inp.value=''; save(); renderClientes();
 }
-
-function addCliente() {
-  const input = document.getElementById('nuevo-cliente-input');
-  const nombre = input.value.trim();
-  if (!nombre) { input.focus(); return; }
-  if (clientes.find(c => c.nombre.toLowerCase() === nombre.toLowerCase())) {
-    alert('Ya existe un cliente con ese nombre.'); return;
-  }
-  clientes.push({ id: nextClienteId(), nombre, obras: [] });
-  input.value = '';
-  guardarClientes(); renderClientes();
+function eliminarCli(id){
+  const c=getCli(id);
+  const n=ots.filter(t=>t.clienteId===id).length;
+  if(!confirm(`¿Eliminar "${c.nombre}"?${n?`\n⚠ Tiene ${n} OT${n!==1?'s':''} asociadas.`:''}`)) return;
+  clientes=clientes.filter(x=>x.id!==id);
+  if(selCliId===id) selCliId=null;
+  save(); renderClientes();
 }
-
-function eliminarCliente(id) {
-  const c = getCliente(id);
-  const otsAfectadas = ots.filter(t => t.clienteId === id).length;
-  let msg = `¿Eliminar al cliente "${c.nombre}"?`;
-  if (otsAfectadas) msg += `\n\n⚠ Tiene ${otsAfectadas} OT${otsAfectadas!==1?'s':''} asociada${otsAfectadas!==1?'s':''}. Las OTs no se eliminarán pero perderán la referencia al cliente.`;
-  if (!confirm(msg)) return;
-  clientes = clientes.filter(x => x.id !== id);
-  if (selectedClienteId === id) selectedClienteId = null;
-  guardarClientes(); renderClientes();
-}
-
-function renderObras() {
-  const body = document.getElementById('obras-panel-body');
-  const title = document.getElementById('obras-panel-title');
-  const c = getCliente(selectedClienteId);
-
-  if (!c) {
-    title.innerHTML = `<i class="ti ti-building-community" style="color:var(--accent)"></i> Obras`;
-    body.innerHTML = `<div class="empty-state"><i class="ti ti-arrow-left" style="font-size:20px;display:block;margin:0 auto 8px;opacity:.4"></i>Seleccioná un cliente para ver sus obras</div>`;
+function renderObras(){
+  const c=getCli(selCliId);
+  const title=document.getElementById('obras-title');
+  const body=document.getElementById('obras-body');
+  if(!c){
+    title.innerHTML=`<i class="ti ti-building-community" style="color:var(--accent)"></i> Obras`;
+    body.innerHTML=`<div class="empty-s">Seleccioná un cliente</div>`;
     return;
   }
-
-  title.innerHTML = `<i class="ti ti-building-community" style="color:var(--accent)"></i> Obras de <strong>${esc(c.nombre)}</strong>`;
-  const obras = c.obras || [];
-  const obraRows = obras.length ? obras.map(o => {
-    const otsCount = ots.filter(t => t.clienteId === c.id && t.obraId === o.id).length;
+  title.innerHTML=`<i class="ti ti-building-community" style="color:var(--accent)"></i> Obras de <strong>${esc(c.nombre)}</strong>`;
+  const obras=c.obras||[];
+  const rows=obras.map(o=>{
+    const n=ots.filter(t=>t.clienteId===c.id&&t.obraId===o.id).length;
     return `<div class="obra-row">
-      <i class="ti ti-building-community" style="color:var(--text3);font-size:15px;flex-shrink:0"></i>
-      <span class="obra-row-name">${esc(o.nombre)}</span>
-      <span class="obra-row-ots">${otsCount} OT${otsCount!==1?'s':''}</span>
+      <i class="ti ti-building-community" style="color:var(--text3);font-size:14px;flex-shrink:0"></i>
+      <span class="obra-name">${esc(o.nombre)}</span>
+      <span class="obra-ots">${n} OT${n!==1?'s':''}</span>
       <button class="btn btn-icon btn-sm" onclick="editarNombre('obra',${c.id},${o.id})" title="Renombrar"><i class="ti ti-edit"></i></button>
-      <button class="btn btn-icon btn-sm" onclick="eliminarObra(${c.id},${o.id})" title="Eliminar" style="color:var(--danger)"><i class="ti ti-trash"></i></button>
+      <button class="btn btn-icon btn-sm btn-danger" onclick="eliminarObra(${c.id},${o.id})" title="Eliminar"><i class="ti ti-trash"></i></button>
     </div>`;
-  }).join('') : `<div class="empty-state">Sin obras. Agregá una abajo.</div>`;
-
-  body.innerHTML = `<div class="obra-list">${obraRows}</div>
+  }).join('');
+  body.innerHTML=`${rows||`<div class="empty-s">Sin obras. Agregá una abajo.</div>`}
     <div class="inline-add">
-      <input id="nueva-obra-input" placeholder="Nombre de la obra..." onkeydown="if(event.key==='Enter')addObra()">
+      <input id="new-obra-input" placeholder="Nombre de la obra..." onkeydown="if(event.key==='Enter')addObra()">
       <button class="btn btn-sm btn-primary" onclick="addObra()"><i class="ti ti-plus"></i> Agregar</button>
     </div>`;
 }
-
-function addObra() {
-  const c = getCliente(selectedClienteId); if (!c) return;
-  const input = document.getElementById('nueva-obra-input');
-  const nombre = input.value.trim();
-  if (!nombre) { input.focus(); return; }
-  if (!c.obras) c.obras = [];
-  if (c.obras.find(o => o.nombre.toLowerCase() === nombre.toLowerCase())) {
-    alert('Ya existe una obra con ese nombre para este cliente.'); return;
-  }
-  c.obras.push({ id: nextObraId(c), nombre });
-  input.value = '';
-  guardarClientes(); renderClientes();
+function addObra(){
+  const c=getCli(selCliId); if(!c) return;
+  const inp=document.getElementById('new-obra-input');
+  const nombre=inp.value.trim();
+  if(!nombre){inp.focus();return;}
+  if(!c.obras) c.obras=[];
+  if(c.obras.find(o=>o.nombre.toLowerCase()===nombre.toLowerCase())){alert('Ya existe.');return;}
+  c.obras.push({id:nextObraId(c),nombre});
+  inp.value=''; save(); renderClientes();
+}
+function eliminarObra(cid,oid){
+  const c=getCli(cid); if(!c) return;
+  const o=getObra(cid,oid);
+  const n=ots.filter(t=>t.clienteId===cid&&t.obraId===oid).length;
+  if(!confirm(`¿Eliminar "${o.nombre}"?${n?`\n⚠ Tiene ${n} OT${n!==1?'s':''} asociadas.`:''}`)) return;
+  c.obras=c.obras.filter(x=>x.id!==oid);
+  save(); renderClientes();
 }
 
-function eliminarObra(clienteId, obraId) {
-  const c = getCliente(clienteId); if (!c) return;
-  const o = getObra(clienteId, obraId);
-  const otsAfectadas = ots.filter(t => t.clienteId === clienteId && t.obraId === obraId).length;
-  let msg = `¿Eliminar la obra "${o.nombre}"?`;
-  if (otsAfectadas) msg += `\n\n⚠ Tiene ${otsAfectadas} OT${otsAfectadas!==1?'s':''} asociada${otsAfectadas!==1?'s':''}. Las OTs no se eliminarán.`;
-  if (!confirm(msg)) return;
-  c.obras = c.obras.filter(x => x.id !== obraId);
-  guardarClientes(); renderClientes();
+// ════════════════════════════════════════════════════════
+// MODAL EDITAR NOMBRE
+// ════════════════════════════════════════════════════════
+function editarNombre(type,cid,oid){
+  editCtx={type,cid,oid};
+  let actual='';
+  if(type==='cli'){const c=getCli(cid);actual=c?c.nombre:'';document.getElementById('medit-title').innerHTML='<i class="ti ti-edit"></i> Renombrar cliente';document.getElementById('medit-lbl').textContent='Nombre del cliente';}
+  else{const o=getObra(cid,oid);actual=o?o.nombre:'';document.getElementById('medit-title').innerHTML='<i class="ti ti-edit"></i> Renombrar obra';document.getElementById('medit-lbl').textContent='Nombre de la obra';}
+  document.getElementById('medit-input').value=actual;
+  document.getElementById('modal-edit').classList.add('open');
+  setTimeout(()=>document.getElementById('medit-input').select(),50);
 }
-
-// ── Modal editar nombre ───────────────────────────────────
-function editarNombre(type, clienteId, obraId) {
-  editNombreCtx = { type, clienteId, obraId };
-  let actual = '';
-  if (type === 'cliente') {
-    const c = getCliente(clienteId);
-    actual = c ? c.nombre : '';
-    document.getElementById('men-title').innerHTML = '<i class="ti ti-edit"></i> Renombrar cliente';
-    document.getElementById('men-label').textContent = 'Nombre del cliente';
+function cerrarModalEdit(){document.getElementById('modal-edit').classList.remove('open');editCtx=null;}
+document.getElementById('modal-edit').addEventListener('click',e=>{if(e.target===document.getElementById('modal-edit'))cerrarModalEdit();});
+function guardarEdit(){
+  const nombre=document.getElementById('medit-input').value.trim();
+  if(!nombre){alert('Ingresá un nombre.');return;}
+  if(!editCtx) return;
+  if(editCtx.type==='cli'){
+    const c=getCli(editCtx.cid); if(!c) return;
+    c.nombre=nombre;
+    ots.filter(t=>t.clienteId===editCtx.cid).forEach(t=>t.cliNombre=nombre);
   } else {
-    const o = getObra(clienteId, obraId);
-    actual = o ? o.nombre : '';
-    document.getElementById('men-title').innerHTML = '<i class="ti ti-edit"></i> Renombrar obra';
-    document.getElementById('men-label').textContent = 'Nombre de la obra';
+    const c=getCli(editCtx.cid); if(!c) return;
+    const o=getObra(editCtx.cid,editCtx.oid); if(!o) return;
+    o.nombre=nombre;
+    ots.filter(t=>t.clienteId===editCtx.cid&&t.obraId===editCtx.oid).forEach(t=>t.obraNombre=nombre);
   }
-  document.getElementById('men-input').value = actual;
-  document.getElementById('modal-edit-nombre').classList.add('open');
-  setTimeout(() => document.getElementById('men-input').select(), 50);
-}
-function cerrarModalEditNombre() {
-  document.getElementById('modal-edit-nombre').classList.remove('open');
-  editNombreCtx = null;
-}
-document.getElementById('modal-edit-nombre').addEventListener('click', e => {
-  if (e.target === document.getElementById('modal-edit-nombre')) cerrarModalEditNombre();
-});
-function guardarEditNombre() {
-  const nombre = document.getElementById('men-input').value.trim();
-  if (!nombre) { alert('Ingresá un nombre.'); return; }
-  if (!editNombreCtx) return;
-  const { type, clienteId, obraId } = editNombreCtx;
-  if (type === 'cliente') {
-    const c = getCliente(clienteId); if (!c) return;
-    c.nombre = nombre;
-    // Actualizar nombre en OTs existentes
-    ots.filter(t => t.clienteId === clienteId).forEach(t => t.clienteNombre = nombre);
-    guardarOTs();
-  } else {
-    const c = getCliente(clienteId); if (!c) return;
-    const o = getObra(clienteId, obraId); if (!o) return;
-    o.nombre = nombre;
-    ots.filter(t => t.clienteId === clienteId && t.obraId === obraId).forEach(t => t.obraNombre = nombre);
-    guardarOTs();
-  }
-  guardarClientes();
-  cerrarModalEditNombre();
-  renderClientes();
+  save(); cerrarModalEdit(); renderClientes();
 }
 
-// ── Init ──────────────────────────────────────────────────
-cargarTodo();
+// ════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════
+load();
+/* __SNAPSHOT__ */
+/* __SNAPSHOT_END__ */
 
-if (!clientes.length && !ots.length) {
-  // Demo
-  clientes = [
-    { id:1, nombre:'Municipalidad', obras:[{id:1,nombre:'Escuela N°4 — Aulas'},{id:2,nombre:'Club Municipal'}] },
-    { id:2, nombre:'Romero Hnos.', obras:[{id:1,nombre:'Galpón Industrial'}] }
+if(!ots.length && !clientes.length){
+  clientes=[
+    {id:1,nombre:'Municipalidad',obras:[{id:1,nombre:'Escuela N°4 — Aulas'},{id:2,nombre:'Club Municipal'}]},
+    {id:2,nombre:'Romero Hnos.',obras:[{id:1,nombre:'Galpón Industrial'}]}
   ];
-  ots = [
-    { id:1, otNum:1, clienteId:1, obraId:1, clienteNombre:'Municipalidad', obraNombre:'Escuela N°4 — Aulas',
-      pedido:'2025-05-10', necesidad:'2026-06-10', refObra:'PO-2025-041', pedidoMat:true,
-      items:[
-        { id:1, desc:'Marco de puerta', total:4, estado:'pintado', entregas:[{fecha:'2025-05-20',cant:2,nota:'Turno mañana'}],
-          materiales:[{desc:'Perfil 40x40',cant:'8 barras',llegado:true},{desc:'Chapa 1.5mm',cant:'4 planchas',llegado:false}] },
-        { id:2, desc:'Puerta metálica', total:4, estado:'fabricacion', entregas:[], materiales:[{desc:'Planchuela 30x3',cant:'20m',llegado:false}] },
-        { id:3, desc:'Rejilla ventilación', total:6, estado:'terminado', entregas:[{fecha:'2025-05-25',cant:3,nota:''}], materiales:[] }
-      ]
-    },
-    { id:2, otNum:2, clienteId:2, obraId:1, clienteNombre:'Romero Hnos.', obraNombre:'Galpón Industrial',
-      pedido:'2025-05-01', necesidad:'2026-05-25', refObra:'', pedidoMat:true,
-      items:[
-        { id:1, desc:'Portón corredizo', total:1, estado:'retirar', entregas:[{fecha:'2025-05-24',cant:1,nota:'Completo'}], materiales:[] },
-        { id:2, desc:'Puerta lateral', total:2, estado:'retirar', entregas:[{fecha:'2025-05-24',cant:2,nota:''}], materiales:[] }
-      ]
-    }
+  ots=[
+    {id:1,otNum:1,clienteId:1,obraId:1,cliNombre:'Municipalidad',obraNombre:'Escuela N°4 — Aulas',
+     ref:'PO-2025-041',fecha:'2025-05-10',historial:[
+       {fecha:'2025-05-22',remito:'R-0041',quien:'Juan Pérez',cant:1,itemDesc:'Marco de puerta'}
+     ],
+     items:[
+       {id:1,desc:'Marco de puerta',solicitado:4,terminado:3,entregado:1,
+        materiales:[{desc:'Perfil 40x40',cant:'8 barras',estado:'recibido'},{desc:'Chapa 1.5mm',cant:'4 planchas',estado:'pedir'}]},
+       {id:2,desc:'Puerta metálica',solicitado:4,terminado:0,entregado:0,
+        materiales:[{desc:'Planchuela 30x3',cant:'20m',estado:'pedido'}]},
+       {id:3,desc:'Rejilla ventilación',solicitado:6,terminado:6,entregado:6,materiales:[]}
+     ]},
+    {id:2,otNum:2,clienteId:2,obraId:1,cliNombre:'Romero Hnos.',obraNombre:'Galpón Industrial',
+     ref:'',fecha:'2025-05-01',historial:[],
+     items:[
+       {id:1,desc:'Portón corredizo',solicitado:1,terminado:1,entregado:1,materiales:[]},
+       {id:2,desc:'Puerta lateral',solicitado:2,terminado:2,entregado:2,materiales:[]}
+     ]}
   ];
-  guardarClientes(); guardarOTs();
+  save();
 }
-
-recalcNextIds();
+recalcIds();
 renderOTs();
-actualizarBackupInfo();
 </script>
 </body>
 </html>
