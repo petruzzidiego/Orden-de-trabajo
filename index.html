@@ -496,6 +496,43 @@ textarea{height:56px;padding:8px 10px;resize:vertical}
 </div>
 </div>
 
+<!-- ══ MODAL ÍTEM ════════════════════════════════════════ -->
+<div class="modal-bg" id="modal-item">
+<div class="modal" style="width:580px">
+  <h3 id="mitem-title"><i class="ti ti-list-details" style="color:var(--accent)"></i> Trabajo</h3>
+  <div class="modal-sub" id="mitem-sub"></div>
+  <div class="form-grid">
+    <div class="fg full"><label>Descripción del trabajo</label><input id="mitem-desc" placeholder="Ej: Marco de puerta, Portón corredizo..."></div>
+    <div class="fg"><label>Cantidad solicitada</label><input id="mitem-cant" type="number" min="1" placeholder="0"></div>
+    <div class="fg"><label>Estado</label>
+      <select id="mitem-est">
+        <option value="pendiente">Pendiente</option>
+        <option value="fabricacion">En fabricación</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-div"></div>
+  <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px;display:flex;align-items:center;gap:5px">
+    <i class="ti ti-package" style="color:var(--accent)"></i> Materiales necesarios
+    <span style="font-size:10px;color:var(--text3);font-weight:400">(opcional)</span>
+  </div>
+  <!-- Lista de materiales editable -->
+  <div id="mitem-mat-list" class="tmp-mat-list" style="margin-bottom:8px"></div>
+  <div class="mat-add-area" style="border:1px dashed var(--border2);border-radius:var(--radius);padding:10px">
+    <div class="mat-add-title"><i class="ti ti-plus" style="font-size:11px"></i> Agregar material</div>
+    <div class="mat-add-row">
+      <input id="mitem-mat-d" placeholder="Material (ej: Caño 40x40...)" style="flex:3;min-width:140px">
+      <input id="mitem-mat-c" placeholder="Cantidad/medida" style="width:110px">
+      <button class="btn btn-sm" type="button" onclick="addMatItem()"><i class="ti ti-plus"></i> Agregar</button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" onclick="cerrarModalItem()">Cancelar</button>
+    <button class="btn btn-primary" onclick="guardarModalItem()"><i class="ti ti-device-floppy"></i> Guardar trabajo</button>
+  </div>
+</div>
+</div>
+
 <script>
 // ════════════════════════════════════════════════════════
 // STATE
@@ -522,12 +559,31 @@ let nextOTNum = 1;
 // ════════════════════════════════════════════════════════
 // PERSISTENCE
 // ════════════════════════════════════════════════════════
+function sanitizarOTs(lista) {
+  return lista.map(t => ({
+    ...t,
+    historial: t.historial || [],
+    items: (t.items||[]).map(it => ({
+      ...it,
+      terminado:  Number(it.terminado  || 0),
+      entregado:  Number(it.entregado  || 0),
+      solicitado: Number(it.solicitado || 0),
+      materiales: (it.materiales||[]).map(m => ({
+        desc: m.desc||'', cant: m.cant||'',
+        estado: m.estado||'pedir',
+        cantPedida:   Number(m.cantPedida   || 0),
+        cantRecibida: Number(m.cantRecibida || 0),
+      }))
+    }))
+  }));
+}
+
 function save() {
   try { localStorage.setItem(KEY_OTS, JSON.stringify({ v: VER, data: ots, ts: Date.now() })); } catch(e){}
   try { localStorage.setItem(KEY_CLI, JSON.stringify(clientes)); } catch(e){}
 }
 function load() {
-  try { const r = localStorage.getItem(KEY_OTS); if(r){ const o=JSON.parse(r); ots=o.data||o; } } catch(e){}
+  try { const r = localStorage.getItem(KEY_OTS); if(r){ const o=JSON.parse(r); ots=sanitizarOTs(o.data||o); } } catch(e){}
   try { const r = localStorage.getItem(KEY_CLI); if(r) clientes=JSON.parse(r); } catch(e){}
 }
 function recalcIds() {
@@ -785,9 +841,11 @@ function renderCardBody(t) {
           </td>
           <td>
             <div class="item-actions">
+              <button class="btn btn-sm" onclick="abrirModalItem(${t.id},${it.id})" title="Editar ítem"><i class="ti ti-edit"></i> Editar</button>
               ${!done?`<button class="btn btn-sm" style="color:var(--blue);border-color:rgba(74,127,193,.3)" onclick="abrirModalFab(${t.id},${it.id})"><i class="ti ti-hammer"></i> Fabricar</button>`:''}
               ${!done && realDisp>0?`<button class="btn btn-sm btn-primary" onclick="abrirModalEnt(${t.id},${it.id})"><i class="ti ti-truck"></i> Entregar</button>`:''}
               ${done?`<span style="font-size:11px;color:var(--green)"><i class="ti ti-circle-check"></i> Completado</span>`:''}
+              <button class="btn btn-sm btn-danger" onclick="eliminarItem(${t.id},${it.id})" title="Eliminar ítem" style="margin-left:auto"><i class="ti ti-trash"></i></button>
             </div>
           </td>
         </tr>`;
@@ -795,13 +853,11 @@ function renderCardBody(t) {
       </tbody>
     </table></div>
 
-    <!-- Agregar item desde card -->
+    <!-- Agregar / editar item desde card -->
     <div class="add-card-block">
-      <div class="add-card-lbl">+ Agregar trabajo a esta OT</div>
+      <div class="add-card-lbl">Trabajos</div>
       <div class="add-card-fields">
-        <input id="nc-desc-${t.id}" placeholder="Descripción" style="flex:2;min-width:120px">
-        <input id="nc-cant-${t.id}" type="number" min="1" placeholder="Cant." style="width:60px">
-        <button class="btn btn-sm btn-primary" onclick="addItemCard(${t.id})"><i class="ti ti-plus"></i> Agregar</button>
+        <button class="btn btn-sm btn-primary" onclick="abrirModalItem(${t.id},null)"><i class="ti ti-plus"></i> Agregar trabajo</button>
       </div>
     </div>
 
@@ -1096,13 +1152,100 @@ function agregarItemOT() {
   document.getElementById('ot-preview').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-// Add item from card
-function addItemCard(tid) {
-  const t=ots.find(x=>x.id===tid); if(!t) return;
-  const desc=document.getElementById(`nc-desc-${tid}`).value.trim();
-  const cant=parseInt(document.getElementById(`nc-cant-${tid}`).value);
-  if(!desc||!cant||cant<1){alert('Completá descripción y cantidad.');return;}
-  t.items.push({id:nextItemId(t),desc,solicitado:cant,terminado:0,entregado:0,materiales:[],});
+// ════════════════════════════════════════════════════════
+// MODAL ÍTEM (agregar / editar)
+// ════════════════════════════════════════════════════════
+let itemCtx = null;   // {otId, itemId|null}
+let itemMats = [];    // materiales temporales del modal
+
+function abrirModalItem(otId, itemId) {
+  itemCtx = { otId, itemId };
+  const t  = ots.find(x=>x.id===otId);
+  const it = itemId ? t.items.find(x=>x.id===itemId) : null;
+
+  document.getElementById('mitem-title').innerHTML = it
+    ? `<i class="ti ti-edit" style="color:var(--accent)"></i> Editar trabajo`
+    : `<i class="ti ti-plus-square" style="color:var(--accent)"></i> Nuevo trabajo`;
+  document.getElementById('mitem-sub').textContent = it
+    ? `OT: ${otLbl(t.otNum||t.id)} — ${obraLabel(t).obra}`
+    : `Agregando a ${otLbl(t.otNum||t.id)} — ${obraLabel(t).obra}`;
+
+  document.getElementById('mitem-desc').value = it ? it.desc : '';
+  document.getElementById('mitem-cant').value = it ? it.solicitado : '';
+  document.getElementById('mitem-est').value  = it ? (it.estado||'pendiente') : 'pendiente';
+
+  itemMats = it ? it.materiales.map(m=>({...m})) : [];
+  renderItemMatList();
+  document.getElementById('mitem-mat-d').value = '';
+  document.getElementById('mitem-mat-c').value = '';
+  document.getElementById('modal-item').classList.add('open');
+}
+
+function cerrarModalItem() {
+  document.getElementById('modal-item').classList.remove('open');
+  itemCtx = null; itemMats = [];
+}
+document.getElementById('modal-item').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-item')) cerrarModalItem();
+});
+
+function renderItemMatList() {
+  const el = document.getElementById('mitem-mat-list');
+  if (!itemMats.length) { el.innerHTML = `<div style="font-size:12px;color:var(--text3);padding:4px 0">Sin materiales cargados.</div>`; return; }
+  el.innerHTML = itemMats.map((m,i) => `
+    <div class="tmp-mat-row">
+      <i class="ti ti-box" style="font-size:11px;color:var(--text3)"></i>
+      <span>${esc(m.desc)}${m.cant?' — <strong>'+esc(m.cant)+'</strong>':''}</span>
+      <select style="height:22px;padding:0 4px;font-size:11px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text);font-family:inherit;margin-left:auto"
+        onchange="itemMats[${i}].estado=this.value">
+        <option value="pedir"    ${m.estado==='pedir'   ?'selected':''}>🔴 Por Pedir</option>
+        <option value="pedido"   ${m.estado==='pedido'  ?'selected':''}>🟡 Pedido</option>
+        <option value="recibido" ${m.estado==='recibido'?'selected':''}>🟢 Recibido</option>
+      </select>
+      <button class="tmp-mat-del" onclick="itemMats.splice(${i},1);renderItemMatList()" title="Quitar"><i class="ti ti-x"></i></button>
+    </div>`).join('');
+}
+
+function addMatItem() {
+  const d = document.getElementById('mitem-mat-d').value.trim();
+  const c = document.getElementById('mitem-mat-c').value.trim();
+  if (!d) { alert('Ingresá la descripción del material.'); return; }
+  itemMats.push({ desc:d, cant:c, estado:'pedir', cantPedida:0, cantRecibida:0 });
+  document.getElementById('mitem-mat-d').value = '';
+  document.getElementById('mitem-mat-c').value = '';
+  renderItemMatList();
+}
+
+function guardarModalItem() {
+  const desc = document.getElementById('mitem-desc').value.trim();
+  const cant = parseInt(document.getElementById('mitem-cant').value);
+  const est  = document.getElementById('mitem-est').value;
+  if (!desc) { alert('Ingresá la descripción del trabajo.'); return; }
+  if (!cant || cant < 1) { alert('Ingresá una cantidad válida.'); return; }
+
+  const t = ots.find(x=>x.id===itemCtx.otId);
+  if (itemCtx.itemId) {
+    // Editar ítem existente
+    const it = t.items.find(x=>x.id===itemCtx.itemId);
+    it.desc       = desc;
+    it.solicitado = cant;
+    it.estado     = est;
+    it.materiales = itemMats.map(m=>({...m}));
+  } else {
+    // Nuevo ítem
+    t.items.push({
+      id: nextItemId(t), desc, solicitado: cant,
+      terminado: 0, entregado: 0, estado: est,
+      materiales: itemMats.map(m=>({...m}))
+    });
+  }
+  save(); cerrarModalItem(); renderOTs();
+}
+
+function eliminarItem(otId, itemId) {
+  if (!confirm('¿Eliminar este trabajo de la OT?')) return;
+  const t = ots.find(x=>x.id===otId);
+  t.items = t.items.filter(x=>x.id!==itemId);
   save(); renderOTs();
 }
 
@@ -1328,7 +1471,7 @@ function importarJSON(input) {
       const nuevasCli = obj.clientes || [];
       if (!Array.isArray(nuevasOts)) { alert('Archivo inválido.'); return; }
       if (!confirm(`¿Importar backup?\n• ${nuevasOts.length} OTs\n• ${nuevasCli.length} clientes\n\nEsto reemplaza los datos actuales.`)) return;
-      ots = nuevasOts;
+      ots = sanitizarOTs(nuevasOts);
       clientes = nuevasCli;
       recalcIds(); save(); renderOTs();
       alert('✅ Backup importado correctamente.');
