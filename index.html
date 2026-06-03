@@ -297,6 +297,11 @@ textarea{height:56px;padding:8px 10px;resize:vertical}
     <button class="nav-btn" onclick="goPage('clientes')" id="tab-clientes"><i class="ti ti-users"></i> Clientes</button>
   </nav>
   <div class="hdr-right">
+    <button class="btn btn-sm" onclick="exportarJSON()" style="color:var(--accent);border-color:rgba(74,158,107,.3)" title="Exportar backup JSON"><i class="ti ti-database-export"></i> Exportar</button>
+    <label class="btn btn-sm" style="cursor:pointer;color:var(--yellow);border-color:rgba(212,160,23,.3)" title="Importar backup JSON">
+      <i class="ti ti-database-import"></i> Importar
+      <input type="file" accept=".json" onchange="importarJSON(this)" style="display:none">
+    </label>
     <button class="btn btn-sm btn-dl" onclick="descargarHTML()"><i class="ti ti-download"></i> Descargar HTML</button>
     <span class="ver">v4.0</span>
   </div>
@@ -1300,6 +1305,37 @@ function guardarEdit(){
     ots.filter(t=>t.clienteId===editCtx.cid&&t.obraId===editCtx.oid).forEach(t=>t.obraNombre=nombre);
   }
   save(); cerrarModalEdit(); renderClientes();
+}
+
+// ════════════════════════════════════════════════════════
+// BACKUP JSON
+// ════════════════════════════════════════════════════════
+function exportarJSON() {
+  const data = { version: VER, exportado: new Date().toISOString(), ots, clientes };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `taller_backup_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+}
+function importarJSON(input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const obj = JSON.parse(e.target.result);
+      const nuevasOts = obj.ots || obj.datos || [];
+      const nuevasCli = obj.clientes || [];
+      if (!Array.isArray(nuevasOts)) { alert('Archivo inválido.'); return; }
+      if (!confirm(`¿Importar backup?\n• ${nuevasOts.length} OTs\n• ${nuevasCli.length} clientes\n\nEsto reemplaza los datos actuales.`)) return;
+      ots = nuevasOts;
+      clientes = nuevasCli;
+      recalcIds(); save(); renderOTs();
+      alert('✅ Backup importado correctamente.');
+    } catch(err) { alert('Error al leer el archivo. ¿Es un backup válido?'); }
+  };
+  reader.readAsText(file);
+  input.value = '';
 }
 
 // ════════════════════════════════════════════════════════
